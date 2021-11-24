@@ -33,6 +33,7 @@ Requirement Notes:
     Bonus features?
         - Pattern matching booknames
         - Google maps link?
+        - adding a favicon
     
     GOALS
     - Configure GIT REPO

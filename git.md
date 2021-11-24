@@ -17,5 +17,7 @@ GIT tut https://www.youtube.com/watch?v=RGOj5yH7evk
 Skip around
 
 git add (adds a file to your local repo)
-git commit (git commit saves the local repo)
+git commit -m "Fix typo in introduction to user guide" (git commit saves the local repo)
 git push (pushes local repo to remote ie github)
+
+TESTING GIT COMMIT MESSAGE

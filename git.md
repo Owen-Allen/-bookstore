@@ -15,3 +15,7 @@ VIM COMMANDS
 
 GIT tut https://www.youtube.com/watch?v=RGOj5yH7evk
 Skip around
+
+git add (adds a file to your local repo)
+git commit (git commit saves the local repo)
+git push (pushes local repo to remote ie github)

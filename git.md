@@ -11,6 +11,7 @@ VIM COMMANDS
         That saves
     :x
         That exits
+    You might need to hit esc first, to get out of insert mode
 
 GIT tut https://www.youtube.com/watch?v=RGOj5yH7evk
 Skip around

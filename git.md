@@ -20,4 +20,7 @@ git add (adds a file to your local repo)
 git commit -m "Fix typo in introduction to user guide" (git commit saves the local repo)
 git push (pushes local repo to remote ie github)
 
+NEW LINE 23
 TESTING GIT COMMIT MESSAGE
+SUPER TESTING
+

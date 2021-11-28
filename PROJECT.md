@@ -65,3 +65,9 @@ Requirement Notes:
 Deadline?
 - DEC 1 (wednesday) database done
 - DEC 8, (wednesday) Simple Query features
+
+
+NOTES 11/28/2021
+
+FRONTEND:
+- Use BILLING INFO and SHIPPING INFO from 'user' relation to autofill checkout!

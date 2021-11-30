@@ -71,6 +71,8 @@ NOTES 11/28/2021
 
 FRONTEND:
 - Use BILLING INFO and SHIPPING INFO from 'user' relation to autofill checkout!
+- cart should be entirely done on front-end, just make a list of the stuff (more on this later)
+- using heroku to store db, and node-postgres and pg to access the db
 
 ASK TA ABOUT:
 - Is book_order redundant? (double diamond)

@@ -22,7 +22,7 @@ let restsID=[];//array of restaurant ids
 
 readRestaurantData();//start the server opening process
 
-/*
+
 const { Client } = require('pg');
 
 const client = new Client({
@@ -36,11 +36,12 @@ client.connect();
 
 client.query('SELECT * FROM student;', (err, res) => {
   if (err) throw err;
+  console.log(res);
   for (let row of res.rows) {
     console.log(JSON.stringify(row));
   }
   client.end();
-});*/
+});
 
 
 //function to serve the home page

@@ -1,0 +1,48 @@
+html
+    head
+        title()= `${restaurant.name}`
+    script(src="../client.js")
+    body(onload="init()")
+        a(href=`/addrestaurant`) Add Restaurant Page
+        br
+        a(href=`/restaurants`) Restaurant List Page
+        br
+        a(href=`/`) Home Page
+        h1()= `${restaurant.name}`
+        p= `Restaurant ID: ${restaurant.id}`
+        input#restID(type="hidden" value = `${restaurant.id}`)
+        p Name:
+            input#name(type="textbox" value = `${restaurant.name}`)
+        p Delivery Fee:
+            input#delivery_fee(type="textbox" value = `${restaurant.delivery_fee}`)
+        p Minimum Order:
+            input#min_order(type="textbox" value = `${restaurant.min_order}`)
+        p Menu:
+        div#menu
+            ul
+                for menuItems,category in restaurant.menu
+                    li= category
+                    ul
+                        for value, key in menuItems
+                            li= `ID: ${key}, Name: ${menuItems[key].name} Description: ${menuItems[key].description} Price: ${menuItems[key].price}`
+        br
+        p Add New Category:
+            input#newCat(type="textbox")
+        button#adderCat(type="button" onclick="addNewCat()") Add New Category
+        
+        p New Menu Item:
+        div#categoryDropper
+            p Select Category
+                select(name='dropperForCat', id='catDropDown')
+                        for menuItems,category in restaurant.menu
+                            option= category
+        div#newMenuItemOptions
+            p Enter Name:
+                input#itemName(type="textbox")
+            p Enter Description:
+                input#itemDescription(type="textbox")
+            p Enter Price:
+                input#itemPrice(type="textbox")
+            button#adderMenu(type="button" onclick="addNewItem()") Add New Menu Item
+        br
+        button#save(type="button" onclick= "save()") Save All Changes

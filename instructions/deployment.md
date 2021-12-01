@@ -23,14 +23,18 @@ How we deployed our app
 
 5. Tested Access
     -once you import pg in your server.js file, you can connect to the client with the following simple code:
+        //import the postgres library
         const { Client } = require('pg');
+        //define the client
         const client = new Client({
             connectionString: process.env.DATABASE_URL,
             ssl: {
                 rejectUnauthorized: false
             }
         });
+        //open the connection
         client.connect();
+    
     - all queries are done with client.query("stringrepresentingquery") like the example below:
         client.query('SELECT * FROM student;', (err, res) => {
             if (err) throw err;

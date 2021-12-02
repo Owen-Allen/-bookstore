@@ -37,8 +37,8 @@ function searchByName(req,res,next){
 //function to serve the home page
 function serveHome(req,res,next){
     //make a dummy query
-    client.query(`SELECT * FROM student where name = 'Zhang';`, (err, queryResult) => {
-        res.status(200).send(JSON.stringify(queryResult));
+    client.query(`SELECT * FROM student;`, (err, queryResult) => {
+        res.render('home',queryResult);
     });
     //res.render("home");
 }

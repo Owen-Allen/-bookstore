@@ -77,3 +77,8 @@ FRONTEND:
 ASK TA ABOUT:
 - Is book_order redundant? (double diamond)
 - If the user inputs a different billing/shipping address, do we need to save that new address IN USER?
+
+NOTES 12/01/2021
+ADD pubCut to diagram
+ADD Primary Keys to diagram
+

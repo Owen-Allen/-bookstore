@@ -30,14 +30,14 @@ openServer();
 
 function searchByName(req,res,next){
     let nameToSearch = req.params.name;
-    client.query(`SELECT * FROM student where name = '${nameToSearch}';`, (err, queryResult) => {
+    client.query(`SELECT * FROM book where title = '${nameToSearch}';`, (err, queryResult) => {
         res.render('book',queryResult);
     });
 }
 
 function nameSearchServe(req,res,next){
     let nameToSearch = req.params.search;
-    client.query(`SELECT * FROM student where name = '${nameToSearch}';`, (err, queryResult) => {
+    client.query(`SELECT * FROM book where title = '${nameToSearch}';`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/home.pug",queryResult));
     });
 }
@@ -46,7 +46,7 @@ function nameSearchServe(req,res,next){
 //function to serve the home page
 function serveHome(req,res,next){
     //make a dummy query
-    client.query(`SELECT * FROM student;`, (err, queryResult) => {
+    client.query(`SELECT * FROM book;`, (err, queryResult) => {
         res.render('home',queryResult);
     });
     //res.render("home");

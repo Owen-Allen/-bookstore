@@ -36,7 +36,7 @@ function sendToBookPage(req,res,next){
 }
 //rerender the home page based on search query received from client
 function searchByTitleServe(req,res,next){
-    let titleToSearch = req.params.title;
+    let titleToSearch = req.params.search;
     client.query(`SELECT * FROM book where title = '${titleToSearch}';`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/home.pug",queryResult));
     });

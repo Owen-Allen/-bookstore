@@ -8,5 +8,5 @@ body
             button#searchButton(type="button" onclick="search()") Search for Users
     ul
         for row in rows
-            li= `Title: ${row.title}, ISBN: ${row.ISBN}`
+            li= `Title: ${row.title}, ISBN: ${row.isbn}`
             a(href= `https://boppa-bat-bookstore.herokuapp.com/nameSearch/${row.title}`) Link to specific book page

@@ -75,11 +75,17 @@ FRONTEND:
 - using heroku to store db, and node-postgres and pg to access the db
 
 ASK TA ABOUT:
-- Is book_order redundant? (double diamond)
+- Is book_order going to be redundant? We think so. (double diamond)
+    You can have a book without an order, but an order needs books, this
 - If the user inputs a different billing/shipping address, do we need to save that new address IN USER?
 
+COMPARE TO ER_DIAGRAM FROM A3?
+We aren't actually gonna make a table for book_order, it just exists in the relation
+cause book_order uses the ISBN from book? How do we illustrate that in ER
+In schema, order will get isbn, the primary key of the owner relationship, order primary key will be isbn AND orderID, if we want to select all books IN order, we select * from order where orderID = something, if we want one specific order for one specific book, select * from order where orderID= something AND isbn = something
+
 NOTES 12/01/2021
-ADD pubCut to diagram
+ADD pubCut to diagram book
 ADD Primary Keys to diagram
 ADD Date to userOrder
     - WE WILL NEED TO USE THIS TO FULFILL THE "TRIGGERS"

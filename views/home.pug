@@ -9,4 +9,4 @@ body
     ul
         for row in rows
             li= `Title: ${row.title}, Genre: ${row.genre} ISBN: ${row.isbn}`
-            a(href= `https://boppa-bat-bookstore.herokuapp.com/bookSearch/${row.isbn}`) Link to specific book page
+            a(href= `https://boppa-bat-bookstore.herokuapp.com/bookRedirect/${row.isbn}`) Link to specific book page

@@ -79,6 +79,8 @@ ASK TA ABOUT:
     You can have a book without an order, but an order needs books, this
 - If the user inputs a different billing/shipping address, do we need to save that new address IN USER?
 
+- Do we need to show all attributes in relation schema? How do we show composites?
+
 COMPARE TO ER_DIAGRAM FROM A3?
 We aren't actually gonna make a table for book_order, it just exists in the relation
 cause book_order uses the ISBN from book? How do we illustrate that in ER

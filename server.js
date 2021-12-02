@@ -11,6 +11,7 @@ app.set("view engine", "pug");
 app.use(express.urlencoded({extended: true})); 
 app.use(express.static("public"));
 app.get('/',serveHome)
+app.get('/home',serveHome)
 app.get('/nameSearch/:name',searchByName)
 app.get('/client.js',sendClient);
 
@@ -28,8 +29,8 @@ openServer();
 
 function searchByName(req,res,next){
     let nameToSearch = req.params.name;
-    client.query(`SELECT * FROM student where name = '${nameToSearch}';`, (err, res) => {
-        res.send(JSON.stringify(res));
+    client.query(`SELECT * FROM student where name = '${nameToSearch}';`, (err, queryResult) => {
+        res.render('book',queryResult)
     });
 }
 

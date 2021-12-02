@@ -4,3 +4,4 @@ body
     ul
         for row in rows
             li= `Name: ${row.name}, dept_name: ${row.dept_name}`
+            a(href= `https://boppa-bat-bookstore.herokuapp.com/nameSearch/:${row.name}`)

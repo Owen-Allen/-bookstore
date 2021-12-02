@@ -86,5 +86,8 @@ ADD Date to userOrder
     expected outcome (see discord slide)
     - Query all the books of the same title sold in the previous month.
     - What type should date be? We want to be able to query by month
-    
+ADD status to user order
+    - we need something to know if the order is complete or not
+    - also, how will we update the order to be complete?
+        (manually is probably fine)
 

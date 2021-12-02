@@ -12,7 +12,7 @@ function search(){
     searchCondition = document.getElementById("searchCondition").value
     console.log(searchCondition);
 	//Send a get request for new data so we can access the db
-	req.open("GET", `/titleSearch/${searchCondition}`);
+	req.open("GET", `/bookSearch/${searchCondition}`);
     req.setRequestHeader("Content-Type", "text/html")
 	req.send();
 }

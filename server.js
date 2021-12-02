@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.get('/',serveHome)
 app.get('/home',serveHome)
-app.get('/bookSearch/:isbn',searchByTitleServe)
-app.get('/bookRedirect/:search',sendToBookPage)
+app.get('/bookSearch/:search',searchByTitleServe)
+app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
 
 //connect to pg
@@ -27,17 +27,17 @@ const client = new Client({
 //open the server
 openServer();
 
-
+//send to a book page based on the isbn received from link
 function sendToBookPage(req,res,next){
-    let titleToSearch = req.params.search;
-    client.query(`SELECT * FROM book where title = '${isbnToSearch}';`, (err, queryResult) => {
+    let isbnToSearch = req.params.isbn;
+    client.query(`SELECT * FROM book where isbn = '${isbnToSearch}';`, (err, queryResult) => {
         res.render('book',queryResult);
     });
 }
-
+//rerender the home page based on search query received from client
 function searchByTitleServe(req,res,next){
-    let isbnToSearch = req.params.isbn;
-    client.query(`SELECT * FROM book where isbn = '${isbnToSearch}';`, (err, queryResult) => {
+    let titleToSearch = req.params.title;
+    client.query(`SELECT * FROM book where title = '${titleToSearch}';`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/home.pug",queryResult));
     });
 }

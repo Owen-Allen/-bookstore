@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.get('/',serveHome)
 app.get('/home',serveHome)
-app.get('/userSearch/:search',nameSearchServe)
+app.get('/bookSearch/:search',nameSearchServe)
 app.get('/nameSearch/:name',searchByName)
 app.get('/client.js',sendClient);
 
@@ -29,15 +29,15 @@ openServer();
 
 
 function searchByName(req,res,next){
-    let nameToSearch = req.params.name;
-    client.query(`SELECT * FROM book where title = '${nameToSearch}';`, (err, queryResult) => {
+    let isbnToSearch = req.params.isbn;
+    client.query(`SELECT * FROM book where title = '${isbnToSearch}';`, (err, queryResult) => {
         res.render('book',queryResult);
     });
 }
 
 function nameSearchServe(req,res,next){
-    let nameToSearch = req.params.search;
-    client.query(`SELECT * FROM book where title = '${nameToSearch}';`, (err, queryResult) => {
+    let isbnToSearch = req.params.isbn;
+    client.query(`SELECT * FROM book where title = '${isbnToSearch}';`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/home.pug",queryResult));
     });
 }
@@ -45,7 +45,7 @@ function nameSearchServe(req,res,next){
 
 //function to serve the home page
 function serveHome(req,res,next){
-    //make a dummy query
+    //make a query for the whole page
     client.query(`SELECT * FROM book;`, (err, queryResult) => {
         res.render('home',queryResult);
     });

@@ -81,4 +81,10 @@ ASK TA ABOUT:
 NOTES 12/01/2021
 ADD pubCut to diagram
 ADD Primary Keys to diagram
+ADD Date to userOrder
+    - WE WILL NEED TO USE THIS TO FULFILL THE "TRIGGERS"
+    expected outcome (see discord slide)
+    - Query all the books of the same title sold in the previous month.
+    - What type should date be? We want to be able to query by month
+    
 

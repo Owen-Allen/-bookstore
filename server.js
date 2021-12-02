@@ -12,6 +12,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.get('/',serveHome)
 app.get('/home',serveHome)
+app.get('/userSearch/:search',nameSearchServe)
 app.get('/nameSearch/:name',searchByName)
 app.get('/client.js',sendClient);
 
@@ -30,7 +31,14 @@ openServer();
 function searchByName(req,res,next){
     let nameToSearch = req.params.name;
     client.query(`SELECT * FROM student where name = '${nameToSearch}';`, (err, queryResult) => {
-        res.render('book',queryResult)
+        res.render('book',queryResult);
+    });
+}
+
+function nameSearchServe(req,res,next){
+    let nameToSearch = req.params.search;
+    client.query(`SELECT * FROM student where name = '${nameToSearch}';`, (err, queryResult) => {
+        res.status(200).send(pug.renderFile("./views/home.pug",queryResult));
     });
 }
 

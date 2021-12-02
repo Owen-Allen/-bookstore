@@ -1,18 +1,20 @@
 {
-  "name": "a3",
+  "name": "-bookstore",
   "version": "1.0.0",
-  "description": "",
+  "description": "Final Project for COMP3005\r AINT SHIT GETTING DONE IN THIS BITCH",
   "main": "server.js",
-  "dependencies": {
-    "express": "^4.17.1",
-    "pg": "^8.7.1",
-    "pug": "^3.0.2"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Owen-Allen/-bookstore.git"
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Owen-Allen/-bookstore/issues"
+  },
+  "homepage": "https://github.com/Owen-Allen/-bookstore#readme"
 }

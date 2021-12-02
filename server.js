@@ -25,10 +25,6 @@ const client = new Client({
 //open the server
 openServer();
 
-//make a dummy query
-client.query(`SELECT * FROM student where name = 'Zhang';`, (err, res) => {
-    res.status(200).send(JSON.stringify(res));
-});
 
 function searchByName(req,res,next){
     let nameToSearch = req.params.name;
@@ -40,7 +36,11 @@ function searchByName(req,res,next){
 
 //function to serve the home page
 function serveHome(req,res,next){
-    res.render("home");
+    //make a dummy query
+    client.query(`SELECT * FROM student where name = 'Zhang';`, (err, res) => {
+        res.status(200).send(JSON.stringify(res));
+    });
+    //res.render("home");
 }
 
 //open the server

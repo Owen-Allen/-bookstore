@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.get('/',serveHome)
 app.get('/home',serveHome)
-app.get('/bookSearch/:search',nameSearchServe)
-app.get('/nameSearch/:name',searchByName)
+app.get('/bookSearch/:isbn',nameSearchServe)
+app.get('/nameSearch/:search',searchByName)
 app.get('/client.js',sendClient);
 
 //connect to pg
@@ -29,7 +29,7 @@ openServer();
 
 
 function searchByName(req,res,next){
-    let isbnToSearch = req.params.isbn;
+    let titleToSearch = req.params.search;
     client.query(`SELECT * FROM book where title = '${isbnToSearch}';`, (err, queryResult) => {
         res.render('book',queryResult);
     });
@@ -37,7 +37,7 @@ function searchByName(req,res,next){
 
 function nameSearchServe(req,res,next){
     let isbnToSearch = req.params.isbn;
-    client.query(`SELECT * FROM book where title = '${isbnToSearch}';`, (err, queryResult) => {
+    client.query(`SELECT * FROM book where isbn = '${isbnToSearch}';`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/home.pug",queryResult));
     });
 }

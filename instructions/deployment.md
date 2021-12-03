@@ -21,6 +21,12 @@ How we deployed our app
         heroku pg:push dbnamehere DATABASE_URL --app boppa-bat-bookstore
         - You change the dbnamehere.  DATABASE_URL is the environment variable that Heroku will use
 
+    - To delete db so you can re-upload
+        heroku login
+        heroku pg:reset -a boppa-bat-bookstore
+        boppa-bat-bookstore
+        
+
 5. Tested Access
     -once you import pg in your server.js file, you can connect to the client with the following simple code:
         //import the postgres library

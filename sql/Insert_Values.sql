@@ -20,10 +20,10 @@ insert into user_account values('U75909221', 'Steve','2315','Lopsided Street','A
 insert into user_account values('U85782902', 'Jenny','12313','Bronktonk Avenue','Bronksonville','ON','R1T6Y0','12313','Bronktonk Avenue','Bronksonville','ON','R1T6Y0');
 
 --    create table user_order (user_id, order_id, 
---cur_house_number,  cur_street,  cur_city ,  cur_province ,  cur_postal_code ,
--- bil_house_number ,  bil_street,  bil_city ,  bil_province ,  bil_postal_code, 
--- str_house_number,  str_street,  str_city,  str_province,  str_postal_code,
-insert into user_order values('U1312311', '84378272','124','Shipping Avenue','Bracebridge','QC','W3R3T3','123','Smith Street','Ottawa','ON','K1C3XL','123','Smith Street','Ottawa','ON','K1C3XL');
+--cur_house_number,  cur_street,  cur_city ,  cur_province ,  cur_postal_code
+-- bil_house_number ,  bil_street,  bil_city ,  bil_province ,  bil_postal_code 
+-- str_house_number,  str_street,  str_city,  str_province,  str_postal_code
+insert into user_order values('U1312311', '84378272','124','Shipping Avenue','Bracebridge','QC','W3R3T3','123','Smith Street','Ottawa','ON','K1C3X6','123','Smith Street','Ottawa','ON','K1C3X6');
 insert into user_order values('U9839480', '12378452','124','Shipping Avenue','Bracebridge','QC','W3R3T3','4323','Bilson Street','Montreal','ON','Q1B3X2','4323','Bilson Street','Montreal','ON','Q1B3X2');
 insert into user_order values('U75909221','18612784','124','Shipping Avenue','Bracebridge','QC','W3R3T3','2315','Lopsided Street','Ajax','ON','P1L2X2','2315','Lopsided Street','Ajax','ON','P1L2X2');
 insert into user_order values('U85782902','18834573','124','Shipping Avenue','Bracebridge','QC','W3R3T3','12313','Bronktonk Avenue','Bronksonville','ON','R1T6Y0','12313','Bronktonk Avenue','Bronksonville','ON','R1T6Y0');
@@ -52,10 +52,11 @@ insert into publisher values('p009998872', 'HarperCollins');
 
 -- ISBN, publisher_id
 -- Phineas and Ferb.... Hachette
--- Grinkies, Hachette
--- Gronkies, Penguin
+-- gonkies, Hachette
+-- grinkies, Penguin
 -- Absurdly Inane, Annick Press
 insert into published values('382309203','p100101001');
 insert into published values('480230880','p100101001');
 insert into published values('480230881','p3n1580085');
 insert into published values('391913919','p888777666');
+

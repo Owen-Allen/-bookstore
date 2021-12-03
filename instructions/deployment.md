@@ -19,6 +19,7 @@ How we deployed our app
             export PGDATABASE=university_database
     - Then to push your db to heroku use:
         heroku pg:push dbnamehere DATABASE_URL --app boppa-bat-bookstore
+        heroku pg:push bookstore DATABASE_URL --app boppa-bat-bookstore
         - You change the dbnamehere.  DATABASE_URL is the environment variable that Heroku will use
 
     - To delete db so you can re-upload

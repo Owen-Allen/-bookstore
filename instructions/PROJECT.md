@@ -102,4 +102,5 @@ NOTES 12/02/2021
 When making user_id, have a U as first letter ex: U12334123
 when making publisher_id, have a P as first letter ex: P1231233
 when making author_id, have an A as first letter: ex: A123131411
-
+NOTES 12/02/2021
+book needs an author, we need to add this limitation

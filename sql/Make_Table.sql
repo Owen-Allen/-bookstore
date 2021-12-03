@@ -48,7 +48,7 @@ create table publisher
 
 
 create table user_order
-	(user_id		varchar(10) UNIQUE NOT NULL,
+	(user_id		varchar(10) NOT NULL,
 	order_id		varchar(10) UNIQUE NOT NULL,
 	current_house_number varchar(8),
 	current_street	varchar(50),

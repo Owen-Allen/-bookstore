@@ -1,0 +1,37 @@
+for publisher:
+publisher_id->name,publisher_id
+
+for published:
+publisher_id,isbn->publisher_id,isbn
+
+for author:
+author_id->name,author_id
+
+for wrote:
+author_id,isbn->author_id,isbn
+
+for book:
+isbn->title,genre,price,stock,num_pages,pub_cut,isbn
+
+CHECK THIS WITH OWEN
+for order_object:
+order_id,isbn->quantity,order_id,isbn
+
+because a user can order to different locations based on their order
+(that is to say a user can order to someplace that is not their stored
+location information), the user_id cannot imply this information.
+user_order:
+user_id,order_id->current_house_number,current_street,current_city,current_province,
+current_postal_code,shipping_house_number,shipping_street,shipping_city,shipping_province,
+shipping_postal_code,billing_house_number,billing_street,billing_city,billing_province,billing_postal_code,user_order,order_id
+
+(there are no duplicate orders, so the order_id can point to the user_order, meaning technically the only primary key here is order_id, we should make this change?)
+order_id->user_order
+
+user_account:
+user_id->name,shipping_house_number,shipping_street,shipping_city,shipping_province,shipping_postal_code,billing_house_number,billing_street,billing_city,billing_province,billing_postal_code,user_id
+
+
+I think we need to show these FD's for the whole table, not just for individual
+relations i.e show what just the user_id implies for the WHOLE table. We NEED to confirm with 
+TA

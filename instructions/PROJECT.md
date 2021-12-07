@@ -75,15 +75,15 @@ FRONTEND:
 - using heroku to store db, and node-postgres and pg to access the db
 
 ASK TA ABOUT:
-- Is book_order going to be redundant? We think so. (double diamond)
+- Is book_order going to be redundant? We think so. (double diamond) YES
     You can have a book without an order, but an order needs books...
 
-- Do we need to show all attributes in relation schema? How do we show composites?
+- Do we need to show all attributes in relation schema? How do we show composites? NO
 
 - I think we need to show FD's for the whole table, not just for individual
-relations i.e show what just the user_id implies for the WHOLE table. (SHOW FD's document)
+relations i.e show what just the user_id implies for the WHOLE table. (SHOW FD's document) NO WE DONT
 
-- Do we need more about banking?
+- Do we need more about banking? NO WE DONT
 
 COMPARE TO ER_DIAGRAM FROM A3?
 We aren't actually gonna make a table for book_order, it just exists in the relation
@@ -112,3 +112,4 @@ we need to query by INNER JOINS, NOT natural joins
 example to 'natural join' user_account and user_order
 select * from user_order inner join user_account using (user_id)
 NOTES 12/04/2021
+removed primary key user_id from user_order, as order_id will be totally unique

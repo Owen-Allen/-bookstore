@@ -76,10 +76,14 @@ FRONTEND:
 
 ASK TA ABOUT:
 - Is book_order going to be redundant? We think so. (double diamond)
-    You can have a book without an order, but an order needs books, this
-- If the user inputs a different billing/shipping address, do we need to save that new address IN USER?
+    You can have a book without an order, but an order needs books...
 
 - Do we need to show all attributes in relation schema? How do we show composites?
+
+- I think we need to show FD's for the whole table, not just for individual
+relations i.e show what just the user_id implies for the WHOLE table. (SHOW FD's document)
+
+- Do we need more about banking?
 
 COMPARE TO ER_DIAGRAM FROM A3?
 We aren't actually gonna make a table for book_order, it just exists in the relation
@@ -102,9 +106,9 @@ NOTES 12/02/2021
 When making user_id, have a U as first letter ex: U12334123
 when making publisher_id, have a P as first letter ex: P1231233
 when making author_id, have an A as first letter: ex: A123131411
-NOTES 12/02/2021
+NOTES 12/03/2021
 book needs an author, we need to add this limitation
 we need to query by INNER JOINS, NOT natural joins
 example to 'natural join' user_account and user_order
 select * from user_order inner join user_account using (user_id)
-
+NOTES 12/04/2021

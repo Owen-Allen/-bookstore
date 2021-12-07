@@ -65,7 +65,7 @@ create table user_order
 	destination_city varchar(50),
 	destination_province varchar(50),
 	destination_postal_code varchar(6),
-	primary key(user_id,order_id),
+	primary key(order_id),
 	foreign key (user_id) references user_account	
 );
 

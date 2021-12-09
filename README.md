@@ -1,3 +1,2 @@
 # -bookstore
 Final Project for COMP3005
-AINT SHIT GETTING DONE IN THIS BITCH

@@ -113,3 +113,6 @@ example to 'natural join' user_account and user_order
 select * from user_order inner join user_account using (user_id)
 NOTES 12/04/2021
 removed primary key user_id from user_order, as order_id will be totally unique
+NOTES 12/09/2021
+Added date to user_order
+Think about adding bank number??? Depends on what we find when implementing

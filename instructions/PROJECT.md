@@ -116,3 +116,8 @@ removed primary key user_id from user_order, as order_id will be totally unique
 NOTES 12/09/2021
 Added date to user_order
 Think about adding bank number??? Depends on what we find when implementing
+
+NOTES 12/10/2021
+added sql views and functions, should be enough to generate reports.
+we need to change date to be a number, so we can use Math on it.
+

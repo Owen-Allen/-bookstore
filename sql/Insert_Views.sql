@@ -1,3 +1,6 @@
+
+--PART A: GETTING AUTHOR TOTAL SALES
+
 --might need to replace the from in total_sales with this. ask owen to test
 create view author_orders(isbn,author_id, order_id,quantity) as(
     select isbn, author_id, order_id, quantity
@@ -26,3 +29,20 @@ create view author_sales(author_id, totalBookSales) as(
 select *
 from author_sales
 where author_id = 'someidhere'
+--Think we need to add a period of time here
+
+
+--PART B: Query sales by GENRE
+
+create view genre_sales(genre, totalBookSales) as(
+    select genre, sum(quantity)
+    from book inner join order_object using (isbn)
+    group by genre
+)
+
+--then you would select from that view with
+select *
+from genre_sales
+where genre = 'somegenrehere'
+--Think we need to add a period of time here
+

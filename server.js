@@ -11,10 +11,13 @@ app.set("view engine", "pug");
 app.use(express.urlencoded({extended: true})); 
 app.use(express.static("public"));
 app.get('/',serveHome)
+app.get('/insertBook',serveBookInsert)
 app.get('/home',serveHome)
 app.get('/bookSearch/:search',searchByTitleServe)
 app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
+app.post('/insertBook', addBookToDB)
+
 
 //connect to pg
 const { Client } = require('pg');
@@ -26,6 +29,34 @@ const client = new Client({
 });
 //open the server
 openServer();
+
+//function to insert a book into db
+function serveBookInsert(req,res,next){
+    //two ways to get ISBN, one is to increment by one for each book, so get the "max" ISBN from the db
+    //other is to just make a random number:
+    let isbn = Math.floor(Math.random() * 100000000000);
+    isbn = isbn.toString();
+    //get the rest of the parameters.
+    let title = req.body.title;
+    let genre = req.body.genre;
+    let price = parseFloat(req.body.price);
+    let stock = parseInt(req.body.stock);
+    let num_pages = parseInt(req.body.num_pages);
+    let pub_cut = parseFloat(req.body.pub_cut);
+    //add the book to db
+    client.query(`insert into book values (${isbn},${title},${genre},${price},${stock},${num_pages},${pub_cut})`), (err, queryResult) => {
+        if (err) throw err;
+    }
+    //redirect to the book's page
+    client.query(`SELECT * FROM book where isbn = '${isbn}';`, (err, queryResult) => {
+        res.render('book',queryResult);
+    });
+}
+//serve the book insert page
+function serveBookInsert(req,res,next){
+    res.render("insertBook");
+}
+
 
 //send to a book page based on the isbn received from link
 function sendToBookPage(req,res,next){

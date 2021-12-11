@@ -1,0 +1,22 @@
+script(src="client.js") 
+header
+    a(href="/")= `Home Page`
+    br
+head
+    p This is the book insert page
+body
+
+    form(action='/insertBook' method="post")
+        p Title: 
+            input(type="text" name= "title" required)
+        p Genre: 
+            input(type="text" name= "genre" required)
+        p Price: 
+            input(type="text" name= "price" required)
+        p Stock: 
+            input(type="text" name= "stock" required)
+        p Number of Pages: 
+            input(type="text" name= "num_pages" required)
+        p Publisher's Cut: 
+            input(type="text" name= "pub_cut" required)
+        button(type="submit") Insert new book

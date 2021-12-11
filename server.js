@@ -24,6 +24,7 @@ app.get('/bookSearchPrice/:min/max/:max',searchByPriceServe)
 app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
 app.get('/style.css',sendClient);
+app.get('/currentCart',serveCurrentCartPage);
 //posts
 app.post('/insertBook', addBookToDB)
 app.post('/orderBook',addBookToCart)
@@ -41,12 +42,64 @@ const client = new Client({
 //open the server
 openServer();
 
+function serveCurrentCartPage(req,res,next){
+    res.render('cart',{cart: currentCart});
+}
+
 //function to process adding a book to cart
 function addBookToCart(req,res,next){
     isbn = req.body.isbn;
     quantity = parseInt(req.body.quantity);
+    title = req.body.title;
+
     console.log(isbn)
     console.log(quantity)
+    console.log(title);
+
+    //check the cart for the same book
+    currentCart.forEach(bookOrder=>{
+        //if they are the same book
+        if (bookOrder.isbn == isbn){
+            //check to see if adding this will order too many books (i.e newQuantity becomes greater than stock)
+            let newQuantity= bookOrder.quantity + quantity;
+            //find the book
+            client.query(`SELECT * FROM book where isbn = '${isbn}';`, (err, queryResult) => {
+                //should only return one row, but we need to access iteratively
+                queryResult.rows.forEach(book=>{
+                    //the stock is less than the requested order
+                    if (book.stock < newQuantity){
+                        //don't allow the order to proceed.
+                        res.send("NOT ENOUGH BOOK STOCK TO COMPLETE THIS ORDER. (ONE ALREADY EXISTS, devnote)");
+                    }else{
+                        //if the code gets to this point, the stock is okay, so update the bookOrder in cart to have the newQuantity
+                        bookOrder.quantity = newQuantity;
+                    }
+                });
+            });
+        }
+    });
+
+    //CHECK THE SYNCHRONISITY, it might be messed up
+    //if code reaches here, the book is NOT already in the cart, so we check quantity, then add it
+    let bookOrderToAdd = {
+        isbn: isbn,
+        quantity: quantity,
+        title: title
+    }
+    //check the stock
+    client.query(`SELECT * FROM book where isbn = '${bookOrderToAdd.isbn}';`, (err, queryResult) => {
+        //should only return one row, but we need to access iteratively
+        queryResult.rows.forEach(book=>{
+            //the stock is less than the requested order
+            if (book.stock < bookOrderToAdd.quantity){
+                //don't allow the order to proceed.
+                res.send("NOT ENOUGH BOOK STOCK TO COMPLETE THIS ORDER.");
+            } else{
+                //if the code gets to this point, the stock is okay,
+                currentCart.push(bookOrderToAdd)
+            }
+        });
+    });
 }
 
 

@@ -10,4 +10,5 @@ body
                 p How many of copies would you like to add to cart? 
                     input(type="text" name= "quantity" required)
                     input(type="hidden" name ="isbn" value = `${row.isbn}`)
+                    input(type="hidden" name ="title" value = `${row.title}`)
                 button(type="submit") Add book to cart

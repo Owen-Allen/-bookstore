@@ -1,0 +1,8 @@
+link(rel='stylesheet', href='style.css')
+head
+    a(href="/")= `Home Page`
+    br
+body
+    ul
+        for item in cart
+            li= `Title: ${item.title}, Quantity: ${item.quantity}, ISBN: ${item.isbn}`

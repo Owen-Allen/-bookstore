@@ -119,5 +119,6 @@ Think about adding bank number??? Depends on what we find when implementing
 
 NOTES 12/10/2021
 added sql views and functions, should be enough to generate reports.
-we need to change date to be a number, so we can use Math on it.
 
+NOTES 12/11/2021
+Make a null search parameter, if they enter nothing, should refresh the page (achieved by adding a get for /bookSearchWhatever/) where whatever is the given search (genre, title, etc)

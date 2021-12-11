@@ -77,6 +77,9 @@ function sendToBookPage(req,res,next){
         res.render('book',queryResult);
     });
 }
+
+//BOOK SEARCHES
+
 //rerender the bookSearch page based on a title search query received from client
 function searchByTitleServe(req,res,next){
     let titleToSearch = req.params.search;

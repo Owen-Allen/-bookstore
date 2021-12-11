@@ -1,7 +1,13 @@
 script(src="client.js")
 link(rel='stylesheet', href='style.css')
 header
-    a(href="/")= `Home Page`
+    a(href="/")= "Home Page"
+    br
+    a(href="/insertBook")= `Book Insert Page`
+    br
+    a(href=`/bookSearch`)= `Book Search Page`
+    br
+    a(href=`/currentCart`)= `View Cart`
     br
 head
     p This is the book insert page

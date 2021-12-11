@@ -21,6 +21,7 @@ app.get('/bookSearchTitle/:search',searchByTitleServe)
 app.get('/bookSearchGenre/:search',searchByGenreServe)
 app.get('/bookSearchAuthor/:search',searchByAuthorServe)
 app.get('/bookSearchPrice/:min/max/:max',searchByPriceServe)
+//other gets
 app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
 app.get('/style.css',sendClient);
@@ -73,6 +74,7 @@ function addBookToCart(req,res,next){
                     }else{
                         //if the code gets to this point, the stock is okay, so update the bookOrder in cart to have the newQuantity
                         bookOrder.quantity = newQuantity;
+                        res.render('cart',{cart: currentCart});
                     }
                 });
             });
@@ -97,6 +99,7 @@ function addBookToCart(req,res,next){
             } else{
                 //if the code gets to this point, the stock is okay,
                 currentCart.push(bookOrderToAdd)
+                res.render('cart',{cart: currentCart});
             }
         });
     });

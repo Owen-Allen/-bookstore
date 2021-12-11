@@ -83,6 +83,7 @@ function addBookToCart(req,res,next){
                         console.log("I ADDED THE QUANTITY")
                         bookOrder.quantity = newQuantity;
                         res.render('cart',{cart: currentCart});
+                        return;
                     }
                 });
             });

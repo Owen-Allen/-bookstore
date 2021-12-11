@@ -109,8 +109,8 @@ function searchByAuthorServe(req,res,next){
 
 //rerender the home page based on a price search query received from client
 function searchByPriceServe(req,res,next){
-    let minToSearch = req.params.price.min;
-    let maxToSearch = req.params.price.max;
+    let minToSearch = req.params.min;
+    let maxToSearch = req.params.max;
     client.query(`SELECT * FROM book where price > ${minToSearch} and price < ${maxToSearch};`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/bookSearch.pug",queryResult));
     });

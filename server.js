@@ -66,7 +66,7 @@ function addBookToCart(req,res,next){
 
     let found = false
     //check the cart for the same book
-    currentCart.forEach(bookOrder=>{
+    for (const bookOrder in currentCart){
         //if they are the same book
         if (bookOrder.isbn == isbn){
             //check to see if adding this will order too many books (i.e newQuantity becomes greater than stock)
@@ -75,7 +75,7 @@ function addBookToCart(req,res,next){
             console.log("about to execute 1st query")
             client.query(`SELECT * FROM book where isbn = '${isbn}';`, (err, queryResult) => {
                 //should only return one row, but we need to access iteratively
-                queryResult.rows.forEach(book=>{
+                for (let book of queryResult.rows){
                     //the stock is less than the requested order
                     if (book.stock < newQuantity){
                         //don't allow the order to proceed.
@@ -90,12 +90,12 @@ function addBookToCart(req,res,next){
                         res.render('cart',{cart: currentCart});
                         return;
                     }
-                });
+                };
                 console.log("end code of 1st query code")
             });
             console.log("outside of 1st query logic")
         }
-    });
+    };
     //sleep(5000)
     console.log("found outside loop is")
     console.log(found);
@@ -112,7 +112,7 @@ function addBookToCart(req,res,next){
         console.log("about to execute 2nd query")
         client.query(`SELECT * FROM book where isbn = '${bookOrderToAdd.isbn}';`, (err, queryResult) => {
             //should only return one row, but we need to access iteratively
-            queryResult.rows.forEach(book=>{
+            for (let book of queryResult.rows){
                 //the stock is less than the requested order
                 if (book.stock < bookOrderToAdd.quantity){
                     //don't allow the order to proceed.
@@ -123,7 +123,7 @@ function addBookToCart(req,res,next){
                     currentCart.push(bookOrderToAdd)
                     res.render('cart',{cart: currentCart});
                 }
-            });
+            };
             console.log("end code of 1st query code")
         });
         console.log("outside of 2nd query logic")

@@ -8,36 +8,36 @@ head
     p This is the test for the home page
     
 body
-    p Book List:
-        p Search: 
-            br
-            br
-            p Enter Title to search by Title
-            input#searchConditionTitle(type="textbox")
-            br
-            button#searchButtonTitle(type="button" onclick="searchByTitle()") Search for Books by Title
-            br
-            br
-            p Enter Genre to search by Genre
-            input#searchConditionGenre(type="textbox")
-            br
-            button#searchButtonGenre(type="button" onclick="searchByGenre()") Search for Books by Genre
-            br
-            br
-            p Enter Author Name to Search by Author
-            input#searchConditionAuthor(type="textbox")
-            br
-            button#searchButtonAuthor(type="button" onclick="searchByAuthor()") Search for Books by Author
-            br
-            br
-            p Enter Min Price
-            input#searchConditionMinPrice(type="textbox")
-            p Enter Max Price 
-            input#searchConditionMaxPrice(type="textbox")
-            br
-            button#searchButtonPrice(type="button" onclick="searchByPrice()") Search for Books by Price (Min,Max)
-            br
-            br
+    p Search: 
+        br
+        br
+        p Enter Title to search by Title
+        input#searchConditionTitle(type="textbox")
+        br
+        button#searchButtonTitle(type="button" onclick="searchByTitle()") Search for Books by Title
+        br
+        br
+        p Enter Genre to search by Genre
+        input#searchConditionGenre(type="textbox")
+        br
+        button#searchButtonGenre(type="button" onclick="searchByGenre()") Search for Books by Genre
+        br
+        br
+        p Enter Author Name to Search by Author
+        input#searchConditionAuthor(type="textbox")
+        br
+        button#searchButtonAuthor(type="button" onclick="searchByAuthor()") Search for Books by Author
+        br
+        br
+        p Enter Min Price
+        input#searchConditionMinPrice(type="textbox")
+        p Enter Max Price 
+        input#searchConditionMaxPrice(type="textbox")
+        br
+        button#searchButtonPrice(type="button" onclick="searchByPrice()") Search for Books by Price (Min,Max)
+        br
+        br
+    p Book List
     ul
         for row in rows
             li= `Title: ${row.title}, Genre: ${row.genre} ISBN: ${row.isbn}`

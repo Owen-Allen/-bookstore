@@ -66,6 +66,7 @@ function addBookToCart(req,res,next){
 
     let found = false
     let done = false;
+    let sentAlready = false;
     let bookStock;
     client.query(`SELECT * FROM book where isbn = '${isbn}';`)
     .then(queryResult => {
@@ -80,6 +81,8 @@ function addBookToCart(req,res,next){
                 let newQuantity= bookOrder.quantity + quantity;
                 if (bookStock < newQuantity){
                     console.log("STOCK TOO LOW");
+                    //to ensure no double send of error message
+                    sentAlready = true;
                     res.send("NOT ENOUGH BOOK STOCK TO COMPLETE THIS ORDER. (ONE ALREADY EXISTS, devnote)");
                     return;
                 }
@@ -99,27 +102,28 @@ function addBookToCart(req,res,next){
         })
     })
     .then(()=>{
-        console.log("found outside function loop is")
-        console.log(found)
-        if (found == false){
-            //CHECK THE SYNCHRONISITY, it might be messed up
-            //if code reaches here, the book is NOT already in the cart, so we check quantity, then add it
-            let bookOrderToAdd = {
-                isbn: isbn,
-                quantity: quantity,
-                title: title
-            }
-            //check the stock
-            if (bookStock < quantity){
-                console.log("STOCK TOO LOW");
-                res.send("NOT ENOUGH BOOK STOCK TO COMPLETE THIS ORDER.");
-            }else{
-                console.log("I ADDED THE OBJECT")
-                currentCart.push(bookOrderToAdd)
-                res.render('cart',{cart: currentCart});
+        if(sentAlready == false){
+            console.log("found outside function loop is")
+            console.log(found)
+            if (found == false){
+                //CHECK THE SYNCHRONISITY, it might be messed up
+                //if code reaches here, the book is NOT already in the cart, so we check quantity, then add it
+                let bookOrderToAdd = {
+                    isbn: isbn,
+                    quantity: quantity,
+                    title: title
+                }
+                //check the stock
+                if (bookStock < quantity){
+                    console.log("STOCK TOO LOW");
+                    res.send("NOT ENOUGH BOOK STOCK TO COMPLETE THIS ORDER.");
+                }else{
+                    console.log("I ADDED THE OBJECT")
+                    currentCart.push(bookOrderToAdd)
+                    res.render('cart',{cart: currentCart});
+                }
             }
         }
-
     })
 }
     //check the cart for the same book

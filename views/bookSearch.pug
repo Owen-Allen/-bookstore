@@ -11,17 +11,24 @@ body
     p Book List:
         p Search:
             input#searchConditionTitle(type="textbox")
+            br
             button#searchButtonTitle(type="button" onclick="searchByTitle()") Search for Books by Title
             br
+            br
             input#searchConditionGenre(type="textbox")
+            br
             button#searchButtonGenre(type="button" onclick="searchByGenre()") Search for Books by Genre
             br
+            br
             input#searchConditionAuthor(type="textbox")
+            br
             button#searchButtonAuthor(type="button" onclick="searchByAuthor()") Search for Books by Author
+            br
             br
             input#searchConditionMinPrice(type="textbox") 
             input#searchConditionMaxPrice(type="textbox")
-            button#searchButtonPrice(type="button" onclick="searchByPrice()") Search for Books by Price
+            br
+            button#searchButtonPrice(type="button" onclick="searchByPrice()") Search for Books by Price (Min,Max)
     ul
         for row in rows
             li= `Title: ${row.title}, Genre: ${row.genre} ISBN: ${row.isbn}`

@@ -14,7 +14,8 @@ app.get('/',serveHome)
 app.get('/bookSearch',serveBookSearchPage)
 app.get('/insertBook',serveBookInsert)
 app.get('/home',serveHome)
-app.get('/bookSearch/:search',searchByTitleServe)
+app.get('/bookSearchTitle/:search',searchByTitleServe)
+app.get('/bookSearchGenre/:search',searchByGenreServe)
 app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
 app.get('/style.css',sendClient);
@@ -76,10 +77,18 @@ function sendToBookPage(req,res,next){
         res.render('book',queryResult);
     });
 }
-//rerender the home page based on search query received from client
+//rerender the bookSearch page based on a title search query received from client
 function searchByTitleServe(req,res,next){
     let titleToSearch = req.params.search;
     client.query(`SELECT * FROM book where title = '${titleToSearch}';`, (err, queryResult) => {
+        res.status(200).send(pug.renderFile("./views/bookSearch.pug",queryResult));
+    });
+}
+
+//rerender the home page based on a genre search query received from client
+function searchByGenreServe(req,res,next){
+    let genreToSearch = req.params.search;
+    client.query(`SELECT * FROM book where genre = '${genreToSearch}';`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/bookSearch.pug",queryResult));
     });
 }

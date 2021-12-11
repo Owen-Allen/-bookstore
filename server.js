@@ -26,6 +26,7 @@ app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
 app.get('/style.css',sendClient);
 app.get('/currentCart',serveCurrentCartPage);
+app.get('/reports',serveReportsPage);
 //posts
 app.post('/insertBook', addBookToDB)
 app.post('/orderBook',addBookToCart)
@@ -44,6 +45,12 @@ const client = new Client({
 openServer();
 
 function serveCurrentCartPage(req,res,next){
+    res.render('cart',{cart: currentCart});
+}
+
+//function to serve the reports page
+function serveReportsPage(req,res,next){
+    //change to render reports
     res.render('cart',{cart: currentCart});
 }
 

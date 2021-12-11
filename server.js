@@ -58,10 +58,27 @@ function addBookToDB(req,res,next){
     let stock = parseInt(req.body.stock);
     let num_pages = parseInt(req.body.num_pages);
     let pub_cut = parseFloat(req.body.pub_cut);
+    let authors = req.body.author_id.split(",");
+    let publishers = req.body.publisher_id.split(",");
+
     //add the book to db
     client.query(`insert into book values('${isbn}','${title}','${genre}',${price},${stock},${num_pages},${pub_cut})`), (err, queryResult) => {
         if (err) throw err;
     }
+    //add the book to wrote:
+    authors.forEach(author=>{
+        client.query(`insert into wrote values('${isbn}',${author}`), (err, queryResult) => {
+            if (err) throw err;
+        }
+    })
+     //add the book to published:
+     publishers.forEach(publisher=>{
+        client.query(`insert into published values('${isbn}',${publisher}`), (err, queryResult) => {
+            if (err) throw err;
+        }
+    })
+    
+    
     //redirect to the book's page
     client.query(`SELECT * FROM book where isbn = '${isbn}';`, (err, queryResult) => {
         res.render('book',queryResult);

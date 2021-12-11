@@ -62,9 +62,13 @@ function searchByPrice(){
 	}
     searchConditionMin = document.getElementById("searchConditionMinPrice").value
     searchConditionMax = document.getElementById("searchConditionMaxPrice").value
+    let price = {
+        min : searchConditionMin,
+        max : searchConditionMax
+    }
     //console.log(searchCondition);
 	//Send a get request for new data so we can access the db
-	req.open("GET", `/bookSearchPrice/${searchConditionMin}/${searchConditionMax}`);
+	req.open("GET", `/bookSearchPrice/${price}`);
     req.setRequestHeader("Content-Type", "text/html")
 	req.send();
 }

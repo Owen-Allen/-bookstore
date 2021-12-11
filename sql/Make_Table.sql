@@ -1,3 +1,7 @@
+drop view author_sales;
+drop view sales_by_date;
+drop view genre_sales;
+
 drop table published;
 drop table wrote;
 drop table order_object;

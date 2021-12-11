@@ -18,7 +18,7 @@ app.get('/home',serveHome)
 app.get('/bookSearchTitle/:search',searchByTitleServe)
 app.get('/bookSearchGenre/:search',searchByGenreServe)
 app.get('/bookSearchAuthor/:search',searchByAuthorServe)
-app.get('/bookSearchPrice/:price')
+app.get('/bookSearchPrice/:min/max/:max',searchByPriceServe)
 app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
 app.get('/style.css',sendClient);
@@ -108,7 +108,7 @@ function searchByAuthorServe(req,res,next){
 }
 
 //rerender the home page based on a price search query received from client
-function searchByAuthorServe(req,res,next){
+function searchByPriceServe(req,res,next){
     let minToSearch = req.params.price.min;
     let maxToSearch = req.params.price.max;
     client.query(`SELECT * FROM book where price > ${minToSearch} and price < ${maxToSearch};`, (err, queryResult) => {

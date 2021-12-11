@@ -66,7 +66,7 @@ function addBookToCart(req,res,next){
 
     let found = false
     //check the cart for the same book
-    for (const bookOrder in currentCart){
+    for (let bookOrder of currentCart){
         //if they are the same book
         if (bookOrder.isbn == isbn){
             //check to see if adding this will order too many books (i.e newQuantity becomes greater than stock)

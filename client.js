@@ -51,6 +51,24 @@ function searchByAuthor(){
 	req.send();
 }
 
+function searchByPrice(){
+    let req = new XMLHttpRequest();
+    //read html data and update page accordingly.
+	req.onreadystatechange = function() {
+		if(this.readyState==4 && this.status==200){
+            console.log(this.response)
+            document.body.innerHTML=this.response;
+        }
+	}
+    searchConditionMin = document.getElementById("searchConditionMinPrice").value
+    searchConditionMax = document.getElementById("searchConditionMaxPrice").value
+    console.log(searchCondition);
+	//Send a get request for new data so we can access the db
+	req.open("GET", `/bookSearchPrice/${searchConditionMin}/${searchConditionMax}`);
+    req.setRequestHeader("Content-Type", "text/html")
+	req.send();
+}
+
 
 
 

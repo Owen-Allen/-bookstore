@@ -18,6 +18,7 @@ app.get('/home',serveHome)
 app.get('/bookSearchTitle/:search',searchByTitleServe)
 app.get('/bookSearchGenre/:search',searchByGenreServe)
 app.get('/bookSearchAuthor/:search',searchByAuthorServe)
+app.get('/bookSearchPrice/:min&:max')
 app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
 app.get('/style.css',sendClient);
@@ -102,6 +103,15 @@ function searchByGenreServe(req,res,next){
 function searchByAuthorServe(req,res,next){
     let authorToSearch = req.params.search;
     client.query(`SELECT * FROM book natural join wrote natural join author where name = '${authorToSearch}';`, (err, queryResult) => {
+        res.status(200).send(pug.renderFile("./views/bookSearch.pug",queryResult));
+    });
+}
+
+//rerender the home page based on a price search query received from client
+function searchByAuthorServe(req,res,next){
+    let minToSearch = req.params.min;
+    let maxToSearch = req.params.max
+    client.query(`SELECT * FROM book where price > ${min} and price < ${max};`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/bookSearch.pug",queryResult));
     });
 }

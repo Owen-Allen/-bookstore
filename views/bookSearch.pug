@@ -1,4 +1,5 @@
-script(src="client.js") 
+script(src="client.js")
+link(rel='stylesheet', href='style.css') 
 
 header
     a(href="/insertBook")= `Book Insert Page`
@@ -9,8 +10,18 @@ head
 body
     p Book List:
         p Search:
-            input#searchCondition(type="textbox")
-            button#searchButton(type="button" onclick="search()") Search for books
+            input#searchConditionTitle(type="textbox")
+            button#searchButton(type="button" onclick="searchByTitle()") Search for Books by Title
+
+            input#searchConditionGenre(type="textbox")
+            button#searchButton(type="button" onclick="searchByGenre()") Search for Books by Genre
+
+            input#searchConditionAuthor(type="textbox")
+            button#searchButton(type="button" onclick="searchByAuthor()") Search for Books by Author
+
+            input#searchConditionMinPrice(type="textbox") Min Price
+            input#searchConditionMaxPrice(type="textbox") Max Price
+            button#searchButton(type="button" onclick="searchByPrice()") Search for Books by Price
     ul
         for row in rows
             li= `Title: ${row.title}, Genre: ${row.genre} ISBN: ${row.isbn}`

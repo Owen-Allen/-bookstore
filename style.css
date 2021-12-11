@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    color: #E27d60;
+    background: #Cafafe;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+    
+  }
+  
+  .column {
+    float: left;
+    width: 33.33%;
+  }
+  
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
+  }
+  
+ #opener{}
+  h1{}
+  li{color: #C38d9e}
+  ul{color: #C38d9e}

@@ -1,5 +1,5 @@
 console.log("I was run for some reason")
-function search(){
+function searchByTitle(){
     //console.log("IT searches")
     let req = new XMLHttpRequest();
     //read html data and update page accordingly.

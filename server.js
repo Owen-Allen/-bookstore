@@ -80,6 +80,7 @@ function addBookToCart(req,res,next){
                         res.send("NOT ENOUGH BOOK STOCK TO COMPLETE THIS ORDER. (ONE ALREADY EXISTS, devnote)");
                     }else{
                         //if the code gets to this point, the stock is okay, so update the bookOrder in cart to have the newQuantity
+                        console.log("I ADDED THE QUANTITY")
                         bookOrder.quantity = newQuantity;
                         res.render('cart',{cart: currentCart});
                     }
@@ -105,6 +106,7 @@ function addBookToCart(req,res,next){
                 res.send("NOT ENOUGH BOOK STOCK TO COMPLETE THIS ORDER.");
             } else{
                 //if the code gets to this point, the stock is okay,
+                console.log("I ADDED THE OBJECT")
                 currentCart.push(bookOrderToAdd)
                 res.render('cart',{cart: currentCart});
             }

@@ -85,14 +85,18 @@ function addBookToCart(req,res,next){
                         console.log("I ADDED THE QUANTITY")
                         bookOrder.quantity = newQuantity;
                         found = true;
+                        console.log("found inside loop is")
+                        console.log(found)
                         res.render('cart',{cart: currentCart});
                         return;
                     }
                 });
+                console.log("end code of 1st query code")
             });
             console.log("outside of 1st query logic")
         }
     });
+    console.log("found outside loop is")
     console.log(found);
     if (found == false){
         //CHECK THE SYNCHRONISITY, it might be messed up
@@ -103,7 +107,7 @@ function addBookToCart(req,res,next){
             title: title
         }
         //check the stock
-        console.log("about to execute 1st query")
+        console.log("about to execute 2nd query")
         client.query(`SELECT * FROM book where isbn = '${bookOrderToAdd.isbn}';`, (err, queryResult) => {
             //should only return one row, but we need to access iteratively
             queryResult.rows.forEach(book=>{
@@ -118,6 +122,7 @@ function addBookToCart(req,res,next){
                     res.render('cart',{cart: currentCart});
                 }
             });
+            console.log("end code of 1st query code")
         });
         console.log("outside of 2nd query logic")
     }

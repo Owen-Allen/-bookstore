@@ -67,13 +67,13 @@ function addBookToDB(req,res,next){
     }
     //add the book to wrote:
     authors.forEach(author=>{
-        client.query(`insert into wrote values('${isbn}',${author}`), (err, queryResult) => {
+        client.query(`insert into wrote values('${isbn}','${author}'`), (err, queryResult) => {
             if (err) throw err;
         }
     })
      //add the book to published:
      publishers.forEach(publisher=>{
-        client.query(`insert into published values('${isbn}',${publisher}`), (err, queryResult) => {
+        client.query(`insert into published values('${isbn}','${publisher}'`), (err, queryResult) => {
             if (err) throw err;
         }
     })

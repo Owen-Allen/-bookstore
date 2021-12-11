@@ -24,7 +24,7 @@ app.get('/bookSearchPrice/:min/max/:max',searchByPriceServe)
 //other gets
 app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
-app.get('/style.css',sendClient);
+app.get('/style.css',sendCSS);
 app.get('/currentCart',serveCurrentCartPage);
 app.get('/reports',serveReportsPage);
 //posts
@@ -43,15 +43,6 @@ const client = new Client({
 });
 //open the server
 openServer();
-
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-      currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-  }
-
 
 function serveCurrentCartPage(req,res,next){
     res.render('cart',{cart: currentCart});
@@ -105,7 +96,7 @@ function addBookToCart(req,res,next){
             console.log("outside of 1st query logic")
         }
     });
-    sleep(5000)
+    //sleep(5000)
     console.log("found outside loop is")
     console.log(found);
 
@@ -274,3 +265,13 @@ function sendCSS(req,res,next){
 		res.status(200).send(data)
 	});
 }
+
+
+
+/*function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }*/

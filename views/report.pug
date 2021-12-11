@@ -1,3 +1,4 @@
+script(src="client.js")
 link(rel='stylesheet', href='style.css')
 header
     a(href="/")= "Home Page"
@@ -9,7 +10,6 @@ header
     a(href=`/currentCart`)= `View Cart`
     br
     a(href=`/reports`)= `Reports`
+
 body
-    ul
-        for item in cart
-            li= `Title: ${item.title}, Quantity: ${item.quantity}, ISBN: ${item.isbn}`
+    p REPORTS GO HERE

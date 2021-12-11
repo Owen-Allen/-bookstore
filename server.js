@@ -18,7 +18,7 @@ app.get('/home',serveHome)
 app.get('/bookSearchTitle/:search',searchByTitleServe)
 app.get('/bookSearchGenre/:search',searchByGenreServe)
 app.get('/bookSearchAuthor/:search',searchByAuthorServe)
-app.get('/bookSearchPrice/:min/:max')
+app.get('/bookSearchPrice/:price')
 app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
 app.get('/style.css',sendClient);

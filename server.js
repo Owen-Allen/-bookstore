@@ -44,7 +44,7 @@ function addBookToDB(req,res,next){
     let num_pages = parseInt(req.body.num_pages);
     let pub_cut = parseFloat(req.body.pub_cut);
     //add the book to db
-    client.query(`insert into book values (${isbn},${title},${genre},${price},${stock},${num_pages},${pub_cut})`), (err, queryResult) => {
+    client.query(`insert into book values('${isbn}','${title}','${genre}',${price},${stock},${num_pages},${pub_cut})`), (err, queryResult) => {
         if (err) throw err;
     }
     //redirect to the book's page

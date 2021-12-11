@@ -10,7 +10,7 @@ function searchByTitle(){
         }
 	}
     searchCondition = document.getElementById("searchConditionTitle").value
-    console.log(searchCondition);
+    //console.log(searchCondition);
 	//Send a get request for new data so we can access the db
 	req.open("GET", `/bookSearchTitle/${searchCondition}`);
     req.setRequestHeader("Content-Type", "text/html")
@@ -27,7 +27,7 @@ function searchByGenre(){
         }
 	}
     searchCondition = document.getElementById("searchConditionGenre").value
-    console.log(searchCondition);
+    //console.log(searchCondition);
 	//Send a get request for new data so we can access the db
 	req.open("GET", `/bookSearchGenre/${searchCondition}`);
     req.setRequestHeader("Content-Type", "text/html")
@@ -44,7 +44,7 @@ function searchByAuthor(){
         }
 	}
     searchCondition = document.getElementById("searchConditionAuthor").value
-    console.log(searchCondition);
+    //console.log(searchCondition);
 	//Send a get request for new data so we can access the db
 	req.open("GET", `/bookSearchAuthor/${searchCondition}`);
     req.setRequestHeader("Content-Type", "text/html")
@@ -62,7 +62,7 @@ function searchByPrice(){
 	}
     searchConditionMin = document.getElementById("searchConditionMinPrice").value
     searchConditionMax = document.getElementById("searchConditionMaxPrice").value
-    console.log(searchCondition);
+    //console.log(searchCondition);
 	//Send a get request for new data so we can access the db
 	req.open("GET", `/bookSearchPrice/${searchConditionMin}/${searchConditionMax}`);
     req.setRequestHeader("Content-Type", "text/html")

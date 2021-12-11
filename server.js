@@ -44,6 +44,15 @@ const client = new Client({
 //open the server
 openServer();
 
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
+
+
 function serveCurrentCartPage(req,res,next){
     res.render('cart',{cart: currentCart});
 }
@@ -96,8 +105,10 @@ function addBookToCart(req,res,next){
             console.log("outside of 1st query logic")
         }
     });
+    sleep(5000)
     console.log("found outside loop is")
     console.log(found);
+
     if (found == false){
         //CHECK THE SYNCHRONISITY, it might be messed up
         //if code reaches here, the book is NOT already in the cart, so we check quantity, then add it

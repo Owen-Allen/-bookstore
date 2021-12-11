@@ -86,7 +86,7 @@ function searchByTitleServe(req,res,next){
 
 //function to serve the home page
 function serveHome(req,res,next){
-    res.render('home',queryResult);
+    res.render('home');
    
 }
 

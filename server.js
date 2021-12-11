@@ -67,7 +67,7 @@ function addBookToCart(req,res,next){
     let found = false
     let done = false;
     //check the cart for the same book
-    var testPromise = newPromise((resolve,reject)=>{
+    var testPromise = new Promise((resolve,reject)=>{
         currentCart.forEach(bookOrder=>{
             //if they are the same book
             if (bookOrder.isbn == isbn){
@@ -91,7 +91,7 @@ function addBookToCart(req,res,next){
                             console.log("found inside loop is")
                             console.log(found)
                             res.render('cart',{cart: currentCart});
-                            return Promise();
+                            //return Promise();
                         }
                     });//end of queryResult forEach
                     //if the code ran as we wanted, resolve.

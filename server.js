@@ -31,7 +31,7 @@ const client = new Client({
 openServer();
 
 //function to insert a book into db
-function serveBookInsert(req,res,next){
+function addBookToDB(req,res,next){
     //two ways to get ISBN, one is to increment by one for each book, so get the "max" ISBN from the db
     //other is to just make a random number:
     let isbn = Math.floor(Math.random() * 100000000000);

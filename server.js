@@ -107,3 +107,14 @@ function sendClient(req,res,next){
 		res.status(200).send(data)
 	});
 }
+
+//read and send the js file for use
+function sendClient(req,res,next){
+	fs.readFile("style.css", function(err, data){
+		if(err){
+			res.status(500).send("Error.");
+			return;
+		}
+		res.status(200).send(data)
+	});
+}

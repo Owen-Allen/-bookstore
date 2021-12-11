@@ -1,11 +1,13 @@
 const express = require('express');
-//const session = require('express-session');
+const session = require('express-session');
 const pug = require('pug');
 //partials = require('express-partials')
 
 let app = express();
 app.use(express.json());
 const fs = require("fs");
+//use session api
+app.use(session({ secret: 'some secret here'}))
 //View engine
 app.set("view engine", "pug");
 app.use(express.urlencoded({extended: true})); 
@@ -22,8 +24,11 @@ app.get('/bookSearchPrice/:min/max/:max',searchByPriceServe)
 app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
 app.get('/style.css',sendClient);
+//posts
 app.post('/insertBook', addBookToDB)
+app.post('/orderBook',addBookToCart)
 
+currentCart=[];
 
 //connect to pg
 const { Client } = require('pg');
@@ -35,6 +40,16 @@ const client = new Client({
 });
 //open the server
 openServer();
+
+//function to process adding a book to cart
+function addBookToCart(req,res,next){
+    isbn = req.body.isbn;
+    quantity = parseInt(req.body.quantity);
+    console.log(isbn)
+    console.log(quantity)
+}
+
+
 
 //serve the book search page:
 function serveBookSearchPage(req,res,next){

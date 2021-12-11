@@ -68,7 +68,7 @@ function searchByPrice(){
     }
     //console.log(searchCondition);
 	//Send a get request for new data so we can access the db
-	req.open("GET", `/bookSearchPrice/${price}`);
+	req.open("GET", `/bookSearchPrice/${JSON.stringify(price)}`);
     req.setRequestHeader("Content-Type", "text/html")
 	req.send();
 }

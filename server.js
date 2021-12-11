@@ -17,6 +17,7 @@ app.get('/home',serveHome)
 app.get('/bookSearch/:search',searchByTitleServe)
 app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
+app.get('/style.css',sendClient);
 app.post('/insertBook', addBookToDB)
 
 
@@ -109,7 +110,7 @@ function sendClient(req,res,next){
 }
 
 //read and send the js file for use
-function sendClient(req,res,next){
+function sendCSS(req,res,next){
 	fs.readFile("style.css", function(err, data){
 		if(err){
 			res.status(500).send("Error.");

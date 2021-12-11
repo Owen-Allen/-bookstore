@@ -66,8 +66,65 @@ function addBookToCart(req,res,next){
 
     let found = false
     let done = false;
+    let bookStock;
+    client.query(`SELECT * FROM book where isbn = '${isbn}';`)
+    .then(queryResult => {
+        //should only return one row, but we need to access iteratively
+        queryResult.rows.forEach(book=>{bookStock = book.stock})
+    })
+    .then(()=>{
+        currentCart.forEach(bookOrder=>{
+            //if they are the same book
+            if (bookOrder.isbn == isbn){
+                //check to see if adding this will order too many books (i.e newQuantity becomes greater than stock)
+                let newQuantity= bookOrder.quantity + quantity;
+                if (bookStock < newQuantity){
+                    console.log("STOCK TOO LOW");
+                    res.send("NOT ENOUGH BOOK STOCK TO COMPLETE THIS ORDER. (ONE ALREADY EXISTS, devnote)");
+                    return;
+                }
+                else{
+                    //if the code gets to this point, the stock is okay, so update the bookOrder in cart to have the newQuantity
+                    console.log("I ADDED THE QUANTITY")
+                    bookOrder.quantity = newQuantity;
+                    found = true;
+                    done = true;
+                    console.log("found inside loop is")
+                    console.log(found)
+                    console.log("rendering new page")
+                    res.render('cart',{cart: currentCart});
+                    return;
+                }
+            }
+        })
+    })
+    .then(()=>{
+        console.log("found outside function loop is")
+        console.log(found)
+        if (found == false){
+            //CHECK THE SYNCHRONISITY, it might be messed up
+            //if code reaches here, the book is NOT already in the cart, so we check quantity, then add it
+            let bookOrderToAdd = {
+                isbn: isbn,
+                quantity: quantity,
+                title: title
+            }
+            //check the stock
+            if (bookStock < quantity){
+                console.log("STOCK TOO LOW");
+                res.send("NOT ENOUGH BOOK STOCK TO COMPLETE THIS ORDER.");
+            }else{
+                console.log("I ADDED THE OBJECT")
+                currentCart.push(bookOrderToAdd)
+                res.render('cart',{cart: currentCart});
+            }
+        }
+
+    })
+}
     //check the cart for the same book
-    var testPromise = new Promise((resolve,reject)=>{
+    /*
+    var testPromise = newPromise((resolve,reject)=>{
         currentCart.forEach(bookOrder=>{
             //if they are the same book
             if (bookOrder.isbn == isbn){
@@ -91,15 +148,15 @@ function addBookToCart(req,res,next){
                             console.log("found inside loop is")
                             console.log(found)
                             res.render('cart',{cart: currentCart});
-                            //return Promise();
+                            return Promise();
                         }
                     });//end of queryResult forEach
                     //if the code ran as we wanted, resolve.
-                
-                    console.log("RESOLVED")
-                    resolve();
-                    
-                    //console.log("end code of 1st query code")
+                    if (found == false && done == true){
+                        console
+                        resolve();
+                    }
+                    console.log("end code of 1st query code")
                 });
                 console.log("outside of 1st query logic")
             }
@@ -107,36 +164,34 @@ function addBookToCart(req,res,next){
 
     });//end line of promise
     testPromise.then(()=>{
-        if (found == false){
-            //CHECK THE SYNCHRONISITY, it might be messed up
-            //if code reaches here, the book is NOT already in the cart, so we check quantity, then add it
-            let bookOrderToAdd = {
-                isbn: isbn,
-                quantity: quantity,
-                title: title
-            }
-            //check the stock
-            console.log("about to execute 2nd query")
-            client.query(`SELECT * FROM book where isbn = '${bookOrderToAdd.isbn}';`, (err, queryResult) => {
-                //should only return one row, but we need to access iteratively
-                queryResult.rows.forEach(book=>{
-                    //the stock is less than the requested order
-                    if (book.stock < bookOrderToAdd.quantity){
-                        //don't allow the order to proceed.
-                        res.send("NOT ENOUGH BOOK STOCK TO COMPLETE THIS ORDER.");
-                    } else{
-                        //if the code gets to this point, the stock is okay,
-                        console.log("I ADDED THE OBJECT")
-                        currentCart.push(bookOrderToAdd)
-                        res.render('cart',{cart: currentCart});
-                    }
-                });
-                console.log("end code of 1st query code")
-            });
-            console.log("outside of 2nd query logic")
+        //CHECK THE SYNCHRONISITY, it might be messed up
+        //if code reaches here, the book is NOT already in the cart, so we check quantity, then add it
+        let bookOrderToAdd = {
+            isbn: isbn,
+            quantity: quantity,
+            title: title
         }
+        //check the stock
+        console.log("about to execute 2nd query")
+        client.query(`SELECT * FROM book where isbn = '${bookOrderToAdd.isbn}';`, (err, queryResult) => {
+            //should only return one row, but we need to access iteratively
+            queryResult.rows.forEach(book=>{
+                //the stock is less than the requested order
+                if (book.stock < bookOrderToAdd.quantity){
+                    //don't allow the order to proceed.
+                    res.send("NOT ENOUGH BOOK STOCK TO COMPLETE THIS ORDER.");
+                } else{
+                    //if the code gets to this point, the stock is okay,
+                    console.log("I ADDED THE OBJECT")
+                    currentCart.push(bookOrderToAdd)
+                    res.render('cart',{cart: currentCart});
+                }
+            });
+            console.log("end code of 1st query code")
+        });
+        console.log("outside of 2nd query logic")
     });
-}
+}*/
 /*console.log("found outside loop is")
     console.log(found);
 

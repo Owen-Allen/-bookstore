@@ -111,7 +111,7 @@ function searchByAuthorServe(req,res,next){
 function searchByPriceServe(req,res,next){
     let minToSearch = req.params.min;
     let maxToSearch = req.params.max;
-    client.query(`SELECT * FROM book where price > ${minToSearch} and price < ${maxToSearch};`, (err, queryResult) => {
+    client.query(`SELECT * FROM book where price >= ${minToSearch} and price <= ${maxToSearch};`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/bookSearch.pug",queryResult));
     });
 }
@@ -120,7 +120,6 @@ function searchByPriceServe(req,res,next){
 //function to serve the home page
 function serveHome(req,res,next){
     res.render('home');
-   
 }
 
 //open the server

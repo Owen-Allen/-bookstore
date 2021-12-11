@@ -14,8 +14,10 @@ app.get('/',serveHome)
 app.get('/bookSearch',serveBookSearchPage)
 app.get('/insertBook',serveBookInsert)
 app.get('/home',serveHome)
+//serves for the searchParams
 app.get('/bookSearchTitle/:search',searchByTitleServe)
 app.get('/bookSearchGenre/:search',searchByGenreServe)
+app.get('/bookSearchAuthor/:search',searchByAuthorServe)
 app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
 app.get('/style.css',sendClient);
@@ -92,6 +94,14 @@ function searchByTitleServe(req,res,next){
 function searchByGenreServe(req,res,next){
     let genreToSearch = req.params.search;
     client.query(`SELECT * FROM book where genre = '${genreToSearch}';`, (err, queryResult) => {
+        res.status(200).send(pug.renderFile("./views/bookSearch.pug",queryResult));
+    });
+}
+
+//rerender the home page based on a author search query received from client
+function searchByAuthorServe(req,res,next){
+    let authorToSearch = req.params.search;
+    client.query(`SELECT * FROM book natural join wrote natural join author where name = '${authorToSearch}';`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/bookSearch.pug",queryResult));
     });
 }

@@ -62,7 +62,7 @@ openServer();
 
 function register(req,res,next){
     //generate the random user ID
-    specifierChar = "U"
+    specifierChar = 'U'
     newUserID = Math.floor(Math.random() * 10000000);
     newUserID = newUserID.toString()
     newUserID = specifierChar.concat(newUserID)

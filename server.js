@@ -30,8 +30,8 @@ app.get('/reports',serveReportsPage);
 //gets and posts for reports
 app.get('/reports/genre', serveGenreReport)
 app.get('/reports/author', serveAuthorReport)
-app.post('/reports/saleDates',serveSaleDateReport)
-app.get('/reports/dateRange', serveDateRangeReport)
+app.get('/reports/saleDates',serveSaleDateReport)
+app.post('/reports/dateRange', serveDateRangeReport)
 app.get('/reports/dateRangeWithBook', serveDateRangeReportWithBook)
 //posts
 app.post('/insertBook', addBookToDB)

@@ -76,7 +76,7 @@ function login(req,res,next){
 
   client.query(`SELECT * FROM user_account where name = '${username}' and user_id = '${userID}';`)
     .then(queryResult => {
-        console.log(queryResult.rows[0])
+        console.log(queryResult)
     })/*
   if(!users.hasOwnProperty(req.body.username)){
     res.status(401).send("Unauthorized");

@@ -508,7 +508,7 @@ function sendToBookPage(req,res,next){
 function searchByTitleServe(req,res,next){
     let titleToSearch = req.params.search;
     client.query(`SELECT * FROM book where title = '${titleToSearch}';`, (err, queryResult) => {
-        res.status(200).send(pug.renderFile("./views/bookSearch.pug",queryResult));
+        res.status(200).send(pug.renderFile("./views/bookSearch.pug",{queryResult:queryResult, session: req.session}));
     });
 }
 
@@ -516,7 +516,7 @@ function searchByTitleServe(req,res,next){
 function searchByGenreServe(req,res,next){
     let genreToSearch = req.params.search;
     client.query(`SELECT * FROM book where genre = '${genreToSearch}';`, (err, queryResult) => {
-        res.status(200).send(pug.renderFile("./views/bookSearch.pug",queryResult));
+        res.status(200).send(pug.renderFile("./views/bookSearch.pug",{queryResult:queryResult, session: req.session}));
     });
 }
 
@@ -524,7 +524,7 @@ function searchByGenreServe(req,res,next){
 function searchByAuthorServe(req,res,next){
     let authorToSearch = req.params.search;
     client.query(`SELECT * FROM book natural join wrote natural join author where name = '${authorToSearch}';`, (err, queryResult) => {
-        res.status(200).send(pug.renderFile("./views/bookSearch.pug",queryResult));
+        res.status(200).send(pug.renderFile("./views/bookSearch.pug",{queryResult:queryResult, session: req.session}));
     });
 }
 
@@ -533,7 +533,7 @@ function searchByPriceServe(req,res,next){
     let minToSearch = req.params.min;
     let maxToSearch = req.params.max;
     client.query(`SELECT * FROM book where price >= ${minToSearch} and price <= ${maxToSearch};`, (err, queryResult) => {
-        res.status(200).send(pug.renderFile("./views/bookSearch.pug",queryResult));
+        res.status(200).send(pug.renderFile("./views/bookSearch.pug",{queryResult:queryResult, session: req.session}));
     });
 }
 

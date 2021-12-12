@@ -30,6 +30,10 @@ app.get('/reports',serveReportsPage);
 //posts
 app.post('/insertBook', addBookToDB)
 app.post('/orderBook',addBookToCart)
+app.post('/reports/genre', serveGenreReport)
+app.post('/reports/author', serveAuthorReport)
+app.post('/reports/dateRange', serveDateRangeReport)
+app.post('/reports/dateRangeWithBook', serveDateRangeWithBook)
 
 currentCart=[];
 
@@ -43,6 +47,29 @@ const client = new Client({
 });
 //open the server
 openServer();
+//function to serve genre report
+function serveGenreReport(req,res,next){
+    //access the view
+    reportName="Sales by Genre"
+    client.query(`SELECT * FROM author_sales';`, (err, queryResult) => {
+        res.render('specificReport',queryResult,reportName);
+    });
+}
+//function to serve author report
+function serveAuthorReport(req,res,next){
+    
+}
+//function to serve date range report
+function serveDateRangeReport(req,res,next){
+    
+}
+
+//function to serve date range report on a specific book
+function serveDateRangeReport(req,res,next){
+    
+}
+
+
 
 function serveCurrentCartPage(req,res,next){
     res.render('cart',{cart: currentCart});

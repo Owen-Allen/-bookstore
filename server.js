@@ -28,6 +28,8 @@ app.get('/client.js',sendClient);
 app.get('/style.css',sendCSS);
 app.get('/currentCart',serveCurrentCartPage);
 app.get('/reports',serveReportsPage);
+app.get('/login',serveLoginPage)
+app.get('/logout',logout)
 //gets and posts for reports
 app.get('/reports/genre', serveGenreReport)
 app.get('/reports/author', serveAuthorReport)
@@ -38,6 +40,7 @@ app.post('/reports/dateRangeWithBook', serveDateRangeReportWithBook)
 app.post('/insertBook', addBookToDB)
 app.post('/orderBook',addBookToCart)
 app.post('/deleteBook',deleteBookFromDB)
+app.post('/login',login);
 
 
 currentCart=[];
@@ -53,6 +56,50 @@ const client = new Client({
 });
 //open the server
 openServer();
+
+function logout(req,res,next){
+
+}
+
+function login(req,res,next){
+	if(req.session.loggedin){
+		res.status(200).send("Already logged in.");
+		return;
+	}
+
+	let username = req.body.username;
+	let userID = req.body.userID;
+
+  console.log("Logging in with credentials:");
+  console.log("Username: " + req.body.username);
+  console.log("userID: " + req.body.userID);
+
+  client.query(`SELECT * FROM user_account where name = '${username}' and user_id = '${userID}';`)
+    .then(queryResult => {
+        console.log(queryResult.rows[0])
+    })/*
+  if(!users.hasOwnProperty(req.body.username)){
+    res.status(401).send("Unauthorized");
+    return;
+  }
+
+  if(users[req.body.username].password === req.body.password){
+    req.session.loggedin = true;
+
+    //We set the username associated with this session
+    //On future requests, we KNOW who the user is
+    //We can look up their information specifically
+    //We can authorize based on who they are
+    req.session.username = username;
+    res.status(200).send("Logged in");
+  }else{
+    res.status(401).send("Not authorized. Invalid password.");
+  }*/
+}
+
+function serveLoginPage(req,res,next){
+    res.render('login');
+}
 
 function deleteBookFromDB(req,res,next){
     isbn = req.body.isbn;

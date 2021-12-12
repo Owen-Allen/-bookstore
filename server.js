@@ -186,7 +186,7 @@ function register(req,res,next){
 }
 
 function serveRegisterPage(req,res,next){
-    res.render("register")
+    res.render("register", {session: req.session})
 }
 
 //function to logout the user
@@ -262,7 +262,7 @@ function deleteBookFromDB(req,res,next){
 }
 
 function serveBookDeletionPage(req,res,next){
-    res.render('bookDeletion');
+    res.render('bookDeletion', {session: req.session});
 }
 
 //function to serve genre report
@@ -289,7 +289,8 @@ function serveAuthorReport(req,res,next){
           if (err) throw err;
           let toSend = {
               rows: queryResult.rows,
-              reportName: reportName
+              reportName: reportName,
+              session: req.session
           }
           res.render('authorReport',toSend);
       });
@@ -352,7 +353,7 @@ function serveDateRangeReportWithBook(req,res,next){
 
 
 function serveCurrentCartPage(req,res,next){
-    res.render('cart',{cart: currentCart});
+    res.render('cart',{cart: currentCart, session: req.session});
 }
 
 //function to serve the reports page
@@ -402,7 +403,7 @@ function addBookToCart(req,res,next){
                     console.log("found inside loop is")
                     console.log(found)
                     console.log("rendering new page")
-                    res.render('cart',{cart: currentCart});
+                    res.render('cart',{cart: currentCart, session: req.session});
                     return;
                 }
             }
@@ -426,7 +427,7 @@ function addBookToCart(req,res,next){
                 }else{
                     console.log("I ADDED THE OBJECT")
                     currentCart.push(bookOrderToAdd)
-                    res.render('cart',{cart: currentCart});
+                    res.render('cart',{cart: currentCart, session: req.session });
                 }
             }
         }
@@ -439,7 +440,7 @@ function addBookToCart(req,res,next){
 function serveBookSearchPage(req,res,next){
      //make a query for the whole page
      client.query(`SELECT * FROM book;`, (err, queryResult) => {
-        res.render('bookSearch',queryResult);
+        res.render('bookSearch',{queryResult: queryResult, session: req.session});
     });
 }
 
@@ -482,7 +483,7 @@ function addBookToDB(req,res,next){
     
     //redirect to the book's page
     client.query(`SELECT * FROM book where isbn = '${isbn}';`, (err, queryResult) => {
-        res.render('book',queryResult);
+        res.render('book',{queryResult: queryResult, session: req.session});
     });
 }
 //serve the book insert page
@@ -495,7 +496,7 @@ function serveBookInsert(req,res,next){
 function sendToBookPage(req,res,next){
     let isbnToSearch = req.params.isbn;
     client.query(`SELECT * FROM book where isbn = '${isbnToSearch}';`, (err, queryResult) => {
-        res.render('book',queryResult);
+        res.render('book',{queryResult: queryResult, session: req.session});
     });
 }
 
@@ -537,7 +538,7 @@ function searchByPriceServe(req,res,next){
 
 //function to serve the home page
 function serveHome(req,res,next){
-    res.render('home');
+    res.render('home',{session: req.session});
 }
 
 //open the server

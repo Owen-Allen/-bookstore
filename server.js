@@ -16,6 +16,7 @@ app.get('/',serveHome)
 app.get('/bookSearch',serveBookSearchPage)
 app.get('/insertBook',serveBookInsert)
 app.get('/home',serveHome)
+app.get('/deleteBooks',serveBookDeletionPage)
 //serves for the searchParams
 app.get('/bookSearchTitle/:search',searchByTitleServe)
 app.get('/bookSearchGenre/:search',searchByGenreServe)
@@ -36,6 +37,7 @@ app.post('/reports/dateRangeWithBook', serveDateRangeReportWithBook)
 //posts
 app.post('/insertBook', addBookToDB)
 app.post('/orderBook',addBookToCart)
+app.post('/deleteBook',deleteBookFromDB)
 
 
 currentCart=[];
@@ -51,6 +53,22 @@ const client = new Client({
 });
 //open the server
 openServer();
+
+function deleteBookFromDB(req,res,next){
+    isbn = req.body.isbn;
+    console.log("About to Delete")
+    client.query(`delete from book where isbn = '${isbn}'`, (err, queryResult) => {
+        if (err) throw err;
+        console.log(queryResult);
+        console.log("should be deleted")
+        res.render('home');
+    });
+}
+
+function serveBookDeletionPage(req,res,next){
+    res.render('bookDeletion');
+}
+
 //function to serve genre report
 function serveGenreReport(req,res,next){
     //define reportName

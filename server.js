@@ -82,13 +82,14 @@ function placeOrder(req,res,next){
     bpn=req.body.bpn;
     bpc=req.body.bpc;
 
+    console.log(req.session)
     //insert into user account
     client.query(`insert into user_order values('${req.session.userID}','${newOrderID}','${theDate}','124','Shipping Avenue','Bracebridge','QC','W3R3T3','${bhn}','${bsn}','${bcn}','${bpn}','${bpc}','${shn}','${ssn}','${scn}','${spn}','${spc}');`)
     .then(queryResult => {
         //loop over every item in cart
         currentCart.forEach(bookOrder =>{
             //insert the item in cart
-            client.query(`insert into user_order values('${newOrderID}','${bookOrder.isbn}','${bookOrder.quantity}');`)
+            client.query(`insert into order_object values('${newOrderID}','${bookOrder.isbn}','${bookOrder.quantity}');`)
             .then(()=>{
                 console.log(`Added book ${bookOrder.isbn}.`)
             })
@@ -145,6 +146,7 @@ function serveRegisterPage(req,res,next){
 //function to logout the user
 function logout(req,res,next){
     if(req.session.loggedin){
+        currentCart = []
 		req.session.loggedin = false;
         req.session.username = undefined;
         req.session.userID = undefined;

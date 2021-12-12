@@ -69,10 +69,6 @@ function logout(req,res,next){
 }
 
 function login(req,res,next){
-	if(req.session.loggedin){
-		res.render("home")
-        return;
-	}
 
 	let username = req.body.username;
 	let userID = req.body.userID;
@@ -87,8 +83,8 @@ function login(req,res,next){
         if (queryResult.rowCount == 1){
             req.session.loggedin = true;
             req.session.username = username;
-            req.session.isAdmin = queryResult.rows[0].isAdmin
-            console.log(req,session.isAdmin)
+            req.session.isAdmin = queryResult.rows[0].isadmin
+            //console.log(req,session.isAdmin)
             res.render("home")
         }//if the rowcount is not 1, wrong auths
         else{
@@ -105,7 +101,14 @@ function serveLoginPage(req,res,next){
     errorMessage = {
         error: false
     }
-    res.render("login",errorMessage)
+    if(req.session.loggedin){
+        console.log()
+		res.render("home")
+        return;
+	}else{
+        res.render("login",errorMessage)
+        return
+    }
 }
 
 function deleteBookFromDB(req,res,next){

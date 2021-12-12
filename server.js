@@ -27,10 +27,10 @@ app.get('/client.js',sendClient);
 app.get('/style.css',sendCSS);
 app.get('/currentCart',serveCurrentCartPage);
 app.get('/reports',serveReportsPage);
-//gets for reports
+//gets and posts for reports
 app.get('/reports/genre', serveGenreReport)
 app.get('/reports/author', serveAuthorReport)
-app.get('/reports/saleDates',serveSaleDateReport)
+app.post('/reports/saleDates',serveSaleDateReport)
 app.get('/reports/dateRange', serveDateRangeReport)
 app.get('/reports/dateRangeWithBook', serveDateRangeReportWithBook)
 //posts

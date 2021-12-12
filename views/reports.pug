@@ -23,7 +23,7 @@ body
     form(action='/reports/saleDates' method="get")
         button(type="submit") View Sales by Date
 
-    form(action='/reports/dateRange' method="get")
+    form(action='/reports/dateRange' method="post")
         p Start Date (enter as YYYY-MM-DD): 
             input(type="text" name= "startDate" required)
         p End Date (enter as YYYY-MM-DD): 

@@ -59,7 +59,7 @@ function serveGenreReport(req,res,next){
         for (let row of queryResult.rows) {
             console.log(JSON.stringify(row));
         }
-        res.render('home');
+        res.render('specificReport');
         //res.render('specificReport',queryResult,reportName);
         console.log("this should be rendered");
     });

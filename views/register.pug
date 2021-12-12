@@ -1,0 +1,33 @@
+script(src="client.js")
+link(rel='stylesheet', href='style.css') 
+
+header
+    a(href="/")= "Home Page"
+    br
+body 
+    h1 Registration Page
+
+    form(action='/register' method="post")
+        p Username: 
+            input(type="text" name= "username" required)
+        p Shipping Address House Number: 
+            input(type="text" name= "shn" required)
+        p Shipping Address Street Name: 
+            input(type="text" name= "ssn" required)
+        p Shipping Address City Name: 
+            input(type="text" name= "scn" required)
+        p Shipping Address Province Name (use abbreviations, E.G ON,QC,AB...): 
+            input(type="text" name= "spn" required)
+        p Shipping Address Postal Code (use form Canadian form A1B2C3)
+            input(type="text" name= "spc" required)
+        p Billing Address House Number: 
+            input(type="text" name= "bhn" required)
+        p Billing Address Street Name: 
+            input(type="text" name= "bsn" required)
+        p Billing Address City Name: 
+            input(type="text" name= "bcn" required)
+        p Billing Address Province Name (use abbreviations, E.G ON,QC,AB...): 
+            input(type="text" name= "bpn" required)
+        p Billing Address Postal Code (use form Canadian form A1B2C3)
+            input(type="text" name= "bpc" required)
+        button(type="submit") Register

@@ -30,6 +30,7 @@ app.get('/currentCart',serveCurrentCartPage);
 app.get('/reports',serveReportsPage);
 app.get('/login',serveLoginPage)
 app.get('/logout',logout)
+app.get('/register',serveRegisterPage)
 //gets and posts for reports
 app.get('/reports/genre', serveGenreReport)
 app.get('/reports/author', serveAuthorReport)
@@ -41,6 +42,7 @@ app.post('/insertBook', addBookToDB)
 app.post('/orderBook',addBookToCart)
 app.post('/deleteBook',deleteBookFromDB)
 app.post('/login',login);
+app.post('register',register)
 
 
 currentCart=[];
@@ -57,17 +59,59 @@ const client = new Client({
 //open the server
 openServer();
 
+
+function register(req,res,next){
+    //generate the random user ID
+    specifierChar = "U"
+    newUserID = Math.floor(Math.random() * 10000000);
+    newUserID = userID.toString()
+    newUserID = specifierChar.concat(newUserID)
+    console.log(newUserID);
+    //get the values from the form
+    userName = req.body.userName;
+
+    shn=req.body.shn;
+    ssn=req.body.ssn;
+    scn=req.body.scn;
+    spn=req.body.spn;
+    spc=req.body.spc;
+
+    bhn=req.body.bhn;
+    bsn=req.body.bsn;
+    bcn=req.body.bcn;
+    bpn=req.body.bpn;
+    bpc=req.body.bpc;
+    //insert the user
+    client.query(`insert into user_account values '${newUserID}','${userName}','${shn}','${ssn}','${scn}','${spn}','${spc}','${bhn}','${bsn}','${bcn}','${bpn}','${bpc}';`, (err, queryResult) => {
+        if (err) throw err;
+        //log the user in
+        req.session.loggedin = true;
+        req.session.username = userName;
+        req.session.userID = userID;
+        req.session.isAdmin = false;
+        res.render('home')
+    });
+
+}
+
+function serveRegisterPage(req,res,next){
+    res.render("register")
+}
+
+//function to logout the user
 function logout(req,res,next){
     if(req.session.loggedin){
 		req.session.loggedin = false;
         req.session.username = undefined;
+        req.session.userID = undefined;
         req.session.isAdmin = false;
-		res.status(200).send("Logged out.");
+		res.render("home");
 	}else{
 		res.status(200).send("You cannot log out because you aren't logged in.");
 	}
 }
 
+//function to login the user
 function login(req,res,next){
 
 	let username = req.body.username;
@@ -83,6 +127,7 @@ function login(req,res,next){
         if (queryResult.rowCount == 1){
             req.session.loggedin = true;
             req.session.username = username;
+            req.session.userID = userID;
             req.session.isAdmin = queryResult.rows[0].isadmin
             //console.log(req,session.isAdmin)
             res.render("home")

@@ -1,0 +1,36 @@
+script(src="client.js")
+link(rel='stylesheet', href='style.css')
+header
+    a(href="/")= "Home Page"
+    br
+    a(href="/insertBook")= `Book Insert Page`
+    br
+    a(href=`/bookSearch`)= `Book Search Page`
+    br
+    a(href=`/currentCart`)= `View Cart`
+    br
+    a(href=`/reports`)= `Reports`
+
+body
+    form(action='/reports/authorID' method="post")
+        button(type="submit") View Sales by Author
+    br
+    br
+    form(action='/reports/genre' method="post")
+        button(type="submit") View Sales by Genre
+    br
+    br
+    form(action='/reports/dateRange' method="post")
+        p Start Date (enter as YYYY-MM-DD): 
+            input(type="text" name= "startDate" required)
+        p End Date (enter as YYYY-MM-DD):
+            input(type="text" name= "endDate" required)
+        button(type="submit") View All Sales by Date
+
+    form(action='/reports/dateRangeWithBook' method="post")
+        p Start Date (enter as YYYY-MM-DD): 
+            input(type="text" name= "startDate" required)
+        p End Date (enter as YYYY-MM-DD):
+            input(type="text" name= "endDate" required)
+        p ISBN to search:
+        button(type="submit") View Sales by Date for Specific Book

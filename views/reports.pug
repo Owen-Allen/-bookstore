@@ -1,30 +1,30 @@
 script(src="client.js")
 link(rel='stylesheet', href='style.css')
 if (session.isAdmin)
-        header
-            a(href="/")= "Home Page"
-            br
-            a(href="/insertBook")= `Book Insert Page`
-            br
-            a(href=`/bookSearch`)= `Book Search Page`
-            br
-            a(href=`/currentCart`)= `View Cart`
-            br
-            a(href=`/reports`)= `Reports`
-            br
-            a(href='/deleteBooks')= "Book Deletion"
-            br
-            a(href='/logout')= "Logout"
-    else 
-        header
-            a(href="/")= "Home Page"
-            br
-            a(href=`/bookSearch`)= `Book Search Page`
-            br
-            a(href='/logout')= "Logout"
-            br
-            a(href=`/currentCart`)= `View Cart`
-            br
+    header
+        a(href="/")= "Home Page"
+        br
+        a(href="/insertBook")= `Book Insert Page`
+        br
+        a(href=`/bookSearch`)= `Book Search Page`
+        br
+        a(href=`/currentCart`)= `View Cart`
+        br
+        a(href=`/reports`)= `Reports`
+        br
+        a(href='/deleteBooks')= "Book Deletion"
+        br
+        a(href='/logout')= "Logout"
+else 
+    header
+        a(href="/")= "Home Page"
+        br
+        a(href=`/bookSearch`)= `Book Search Page`
+        br
+        a(href='/logout')= "Logout"
+        br
+        a(href=`/currentCart`)= `View Cart`
+        br
 
 body
     h1 Generate Reports Below

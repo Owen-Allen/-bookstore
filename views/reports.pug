@@ -12,13 +12,13 @@ header
     a(href=`/reports`)= `Reports`
 
 body
+    h1 Generate Reports Below
+
     form(action='/reports/authorID' method="post")
         button(type="submit") View Sales by Author
     br
-    br
     form(action='/reports/genre' method="post")
         button(type="submit") View Sales by Genre
-    br
     br
     form(action='/reports/dateRange' method="post")
         p Start Date (enter as YYYY-MM-DD): 
@@ -26,7 +26,7 @@ body
         p End Date (enter as YYYY-MM-DD):
             input(type="text" name= "endDate" required)
         button(type="submit") View All Sales by Date
-
+    br
     form(action='/reports/dateRangeWithBook' method="post")
         p Start Date (enter as YYYY-MM-DD): 
             input(type="text" name= "startDate" required)

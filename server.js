@@ -87,7 +87,7 @@ function login(req,res,next){
         if (queryResult.rowCount == 1){
             req.session.loggedin = true;
             req.session.username = username;
-            req.session.isAdmin = queryResult.row[0].isAdmin
+            req.session.isAdmin = queryResult.rows[0].isAdmin
             console.log(req,session.isAdmin)
             res.render("home")
         }//if the rowcount is not 1, wrong auths

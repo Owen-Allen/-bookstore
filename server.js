@@ -101,12 +101,14 @@ function serveSaleDateReport(req,res,next){
 function serveDateRangeReport(req,res,next){
     startDate = req.body.startDate;
     endDate= req.body.endDate;
-    console.log(startDate);
-    console.log(endDate);
+    //console.log(startDate);
+    //console.log(endDate);
     client.query(`select * from sales_between_dates('${startDate}','${endDate}');`, (err, queryResult) => {
         if (err) throw err;
-        for (let row of queryResult.rows) {
-            console.log(JSON.stringify(row));
+        let toSend = {
+            result: queryResult.rows[0],
+            startDate: startDate,
+            endDate: endDate
         }
     });
 }

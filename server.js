@@ -42,7 +42,7 @@ app.post('/insertBook', addBookToDB)
 app.post('/orderBook',addBookToCart)
 app.post('/deleteBook',deleteBookFromDB)
 app.post('/login',login);
-app.post('register',register)
+app.post('/register',register);
 
 
 currentCart=[];

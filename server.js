@@ -221,8 +221,9 @@ function login(req,res,next){
             req.session.username = username;
             req.session.userID = userID;
             console.log(queryResult.rows[0])
-            req.session.isAdmin = queryResult.rows[0].isadmin
+            req.session.isAdmin = queryResult.rows[0].isadmin;
             console.log(req.session.isAdmin)
+            console.log(queryResult.rows[0].isadmin);
             res.render("home",{session: req.session})
         }//if the rowcount is not 1, wrong auths
         else{

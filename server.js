@@ -30,7 +30,7 @@ app.get('/reports',serveReportsPage);
 //posts
 app.post('/insertBook', addBookToDB)
 app.post('/orderBook',addBookToCart)
-app.post('/reports/genre', serveGenreReport)
+app.get('/reports/genre', serveGenreReport)
 app.post('/reports/author', serveAuthorReport)
 app.post('/reports/dateRange', serveDateRangeReport)
 app.post('/reports/dateRangeWithBook', serveDateRangeReportWithBook)
@@ -55,6 +55,9 @@ function serveGenreReport(req,res,next){
     client.query(`select * from genre_sales;`, (err, queryResult) => {
         if (err) throw err;
         console.log("I have queried and found data");
+        for (let row of queryResult.rows) {
+            console.log(JSON.stringify(row));
+        }
         res.render('specificReport',queryResult,reportName);
         console.log("this should be rendered");
     });

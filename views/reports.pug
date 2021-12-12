@@ -17,7 +17,7 @@ body
     form(action='/reports/authorID' method="post")
         button(type="submit") View Sales by Author
 
-    form(action='/reports/genre' method="post")
+    form(action='/reports/genre' method="get")
         button(type="submit") View Sales by Genre
 
     form(action='/reports/dateRange' method="post")
@@ -26,7 +26,7 @@ body
         p End Date (enter as YYYY-MM-DD): 
             input(type="text" name= "endDate" required)
         button(type="submit") View All Sales by Date
-        
+
     form(action='/reports/dateRangeWithBook' method="post")
         p Start Date (enter as YYYY-MM-DD): 
             input(type="text" name= "startDate" required)

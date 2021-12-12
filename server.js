@@ -110,6 +110,7 @@ function serveDateRangeReport(req,res,next){
             startDate: startDate,
             endDate: endDate
         }
+        res.render("dateRangeReport",toSend)
     });
 }
 

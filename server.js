@@ -40,6 +40,7 @@ currentCart=[];
 
 //connect to pg
 const { Client } = require('pg');
+const { query } = require('express');
 const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: {
@@ -59,7 +60,11 @@ function serveGenreReport(req,res,next){
         for (let row of queryResult.rows) {
             console.log(JSON.stringify(row));
         }
-        res.render('specificReport');
+        let toSend = {
+            rows: queryResult.rows,
+            reportName: reportName
+        }
+        res.render('specificReport',toSend);
         //res.render('specificReport',queryResult,reportName);
         console.log("this should be rendered");
     });

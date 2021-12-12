@@ -64,7 +64,7 @@ function register(req,res,next){
     //generate the random user ID
     specifierChar = "U"
     newUserID = Math.floor(Math.random() * 10000000);
-    newUserID = userID.toString()
+    newUserID = newUserID.toString()
     newUserID = specifierChar.concat(newUserID)
     console.log(newUserID);
     //get the values from the form
@@ -87,7 +87,7 @@ function register(req,res,next){
         //log the user in
         req.session.loggedin = true;
         req.session.username = userName;
-        req.session.userID = userID;
+        req.session.userID = newUserID;
         req.session.isAdmin = false;
         res.render('home')
     });

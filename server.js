@@ -44,7 +44,7 @@ app.post('/deleteBook',deleteBookFromDB)
 app.post('/login',login);
 app.post('/register',register);
 app.post('/placeOrder',placeOrder)
-
+app.post('/placeOrderWithSaved',placeOrderWithSaved)
 
 currentCart=[];
 
@@ -59,6 +59,52 @@ const client = new Client({
 });
 //open the server
 openServer();
+
+
+function placeOrderWithSaved(req,res,next){
+    newOrderID = Math.floor(Math.random() * 100000000);
+    newOrderID = newOrderID.toString()
+    console.log(newOrderID)
+    //generate the Date
+    let theDate = new Date()
+    theDate = theDate.toISOString().split('T')[0]
+    console.log(theDate);
+
+    client.query(`SELECT * FROM user_account where user_id = '${req.session.userID}';`)
+    .then(queryResult => {
+        shn=queryResult.rows[0].shipping_house_number,
+        ssn=queryResult.rows[0].shipping_street	
+        scn=queryResult.rows[0].shipping_city 
+        spn=queryResult.rows[0].shipping_province 
+        spc=queryResult.rows[0].shipping_postal_code
+        bhn=queryResult.rows[0].billing_house_number
+        bsn=queryResult.rows[0].billing_street	
+        bcn=queryResult.rows[0].billing_city 
+        bpn=queryResult.rows[0].billing_province 
+        bpc=queryResult.rows[0].billing_postal_code
+    })
+    .then(()=>{
+        client.query(`insert into user_order values('${req.session.userID}','${newOrderID}','${theDate}','124','Shipping Avenue','Bracebridge','QC','W3R3T3','${bhn}','${bsn}','${bcn}','${bpn}','${bpc}','${shn}','${ssn}','${scn}','${spn}','${spc}');`)
+        .then(queryResult => {
+            //loop over every item in cart
+            currentCart.forEach(bookOrder =>{
+                //insert the item in cart
+                client.query(`insert into order_object values('${newOrderID}','${bookOrder.isbn}','${bookOrder.quantity}');`)
+                .then(()=>{
+                    console.log(`Added book ${bookOrder.isbn}.`)
+                })
+                //query insert into order object
+                //query call function orderBooks
+            })
+        //once code has fully run
+        })
+        .then(()=>{
+            //clear current cart
+            currentCart = [];
+            res.render("home")
+        })
+    })
+}
 
 function placeOrder(req,res,next){
     //generate the orderID

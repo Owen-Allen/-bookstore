@@ -10,6 +10,9 @@ header
     a(href=`/currentCart`)= `View Cart`
     br
     a(href=`/reports`)= `Reports`
+if(error)
+    script.
+        alert("Bad Login, try again");
 body
     h1 Login Page
     form(action='/login' method="post")

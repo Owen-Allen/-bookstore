@@ -58,47 +58,54 @@ const client = new Client({
 openServer();
 
 function logout(req,res,next){
-
+    if(req.session.loggedin){
+		req.session.loggedin = false;
+        req.session.username = undefined;
+        req.session.isAdmin = false;
+		res.status(200).send("Logged out.");
+	}else{
+		res.status(200).send("You cannot log out because you aren't logged in.");
+	}
 }
 
 function login(req,res,next){
 	if(req.session.loggedin){
-		res.status(200).send("Already logged in.");
-		return;
+		res.render("home")
+        return;
 	}
 
 	let username = req.body.username;
 	let userID = req.body.userID;
 
-  console.log("Logging in with credentials:");
+  console.log("Logging in a user with credentials:");
   console.log("Username: " + req.body.username);
   console.log("userID: " + req.body.userID);
 
   client.query(`SELECT * FROM user_account where name = '${username}' and user_id = '${userID}';`)
     .then(queryResult => {
-        console.log(queryResult)
-    })/*
-  if(!users.hasOwnProperty(req.body.username)){
-    res.status(401).send("Unauthorized");
-    return;
-  }
-
-  if(users[req.body.username].password === req.body.password){
-    req.session.loggedin = true;
-
-    //We set the username associated with this session
-    //On future requests, we KNOW who the user is
-    //We can look up their information specifically
-    //We can authorize based on who they are
-    req.session.username = username;
-    res.status(200).send("Logged in");
-  }else{
-    res.status(401).send("Not authorized. Invalid password.");
-  }*/
+        //if rowCount = 1, then the user exists.
+        if (queryResult.rowCount == 1){
+            req.session.loggedin = true;
+            req.session.username = username;
+            req.session.isAdmin = queryResult.row[0].isAdmin
+            console.log(req,session.isAdmin)
+            res.render("home")
+        }//if the rowcount is not 1, wrong auths
+        else{
+            errorMessage = {
+                error: true
+            }
+            res.render("login",errorMessage)
+        }
+    })
+   
 }
 
 function serveLoginPage(req,res,next){
-    res.render('login');
+    errorMessage = {
+        error: false
+    }
+    res.render("login",errorMessage)
 }
 
 function deleteBookFromDB(req,res,next){

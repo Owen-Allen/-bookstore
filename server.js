@@ -101,7 +101,7 @@ function placeOrderWithSaved(req,res,next){
         .then(()=>{
             //clear current cart
             currentCart = [];
-            res.render("home")
+            res.render("home",{session: req.session})
         })
     })
 }
@@ -147,7 +147,7 @@ function placeOrder(req,res,next){
     .then(()=>{
         //clear current cart
         currentCart = [];
-        res.render("home")
+        res.render("home",{session: req.session})
     })
 }
 
@@ -180,7 +180,7 @@ function register(req,res,next){
         req.session.username = userName;
         req.session.userID = newUserID;
         req.session.isAdmin = false;
-        res.render('home')
+        res.render('home',{session: req.session})
     });
 
 }
@@ -197,7 +197,7 @@ function logout(req,res,next){
         req.session.username = undefined;
         req.session.userID = undefined;
         req.session.isAdmin = false;
-		res.render("home");
+		res.render("home",{session: req.session});
 	}else{
 		res.status(200).send("You cannot log out because you aren't logged in.");
 	}
@@ -222,11 +222,12 @@ function login(req,res,next){
             req.session.userID = userID;
             req.session.isAdmin = queryResult.rows[0].isadmin
             //console.log(req,session.isAdmin)
-            res.render("home")
+            res.render("home",{session: req.session})
         }//if the rowcount is not 1, wrong auths
         else{
             errorMessage = {
-                error: true
+                error: true,
+                session: req.session
             }
             res.render("login",errorMessage)
         }
@@ -236,11 +237,12 @@ function login(req,res,next){
 
 function serveLoginPage(req,res,next){
     errorMessage = {
-        error: false
+        error: false,
+        session: req.session
     }
     if(req.session.loggedin){
         console.log()
-		res.render("home")
+		res.render("home",{session: req.session})
         return;
 	}else{
         res.render("login",errorMessage)
@@ -255,7 +257,7 @@ function deleteBookFromDB(req,res,next){
         if (err) throw err;
         console.log(queryResult);
         console.log("should be deleted")
-        res.render('home');
+        res.render('home',{session: req.session});
     });
 }
 
@@ -272,7 +274,8 @@ function serveGenreReport(req,res,next){
         if (err) throw err;
         let toSend = {
             rows: queryResult.rows,
-            reportName: reportName
+            reportName: reportName,
+            session: req.session
         }
         res.render('genreReport',toSend);
     });
@@ -302,7 +305,8 @@ function serveSaleDateReport(req,res,next){
         if (err) throw err;
         let toSend = {
             rows: queryResult.rows,
-            reportName: reportName
+            reportName: reportName,
+            session: req.session
         }
         res.render('saleDateReport',toSend);
     });
@@ -320,7 +324,8 @@ function serveDateRangeReport(req,res,next){
         let toSend = {
             result: queryResult.rows[0],
             startDate: startDate,
-            endDate: endDate
+            endDate: endDate,
+            session: req.session
         }
         res.render("dateRangeReport",toSend)
     });
@@ -337,7 +342,8 @@ function serveDateRangeReportWithBook(req,res,next){
             result: queryResult.rows[0],
             startDate: startDate,
             endDate: endDate,
-            isbn: isbn
+            isbn: isbn,
+            session: req.session
         }
         res.render("dateRangeReportBook",toSend)
     });

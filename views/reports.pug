@@ -30,7 +30,7 @@ body
             input(type="text" name= "endDate" required)
         button(type="submit") View # of Sales between Dates
 
-    form(action='/reports/dateRangeWithBook' method="get")
+    form(action='/reports/dateRangeWithBook' method="post")
         p Start Date (enter as YYYY-MM-DD): 
             input(type="text" name= "startDateBook" required)
         p End Date (enter as YYYY-MM-DD): 

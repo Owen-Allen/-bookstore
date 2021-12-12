@@ -32,7 +32,7 @@ app.get('/reports/genre', serveGenreReport)
 app.get('/reports/author', serveAuthorReport)
 app.get('/reports/saleDates',serveSaleDateReport)
 app.post('/reports/dateRange', serveDateRangeReport)
-app.get('/reports/dateRangeWithBook', serveDateRangeReportWithBook)
+app.post('/reports/dateRangeWithBook', serveDateRangeReportWithBook)
 //posts
 app.post('/insertBook', addBookToDB)
 app.post('/orderBook',addBookToCart)

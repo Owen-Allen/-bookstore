@@ -33,7 +33,7 @@ app.post('/orderBook',addBookToCart)
 app.post('/reports/genre', serveGenreReport)
 app.post('/reports/author', serveAuthorReport)
 app.post('/reports/dateRange', serveDateRangeReport)
-app.post('/reports/dateRangeWithBook', serveDateRangeWithBook)
+app.post('/reports/dateRangeWithBook', serveDateRangeReportWithBook)
 
 currentCart=[];
 
@@ -65,7 +65,7 @@ function serveDateRangeReport(req,res,next){
 }
 
 //function to serve date range report on a specific book
-function serveDateRangeReport(req,res,next){
+function serveDateRangeReportWithBook(req,res,next){
     
 }
 

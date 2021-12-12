@@ -17,17 +17,17 @@ body
     form(action='/reports/genre' method="get")
         button(type="submit") View Sales by Genre
 
-    form(action='/reports/authorID' method="post")
+    form(action='/reports/authorID' method="get")
         button(type="submit") View Sales by Author
 
-    form(action='/reports/dateRange' method="post")
+    form(action='/reports/dateRange' method="get")
         p Start Date (enter as YYYY-MM-DD): 
             input(type="text" name= "startDate" required)
         p End Date (enter as YYYY-MM-DD): 
             input(type="text" name= "endDate" required)
         button(type="submit") View All Sales by Date
 
-    form(action='/reports/dateRangeWithBook' method="post")
+    form(action='/reports/dateRangeWithBook' method="get")
         p Start Date (enter as YYYY-MM-DD): 
             input(type="text" name= "startDate" required)
         p End Date (enter as YYYY-MM-DD): 

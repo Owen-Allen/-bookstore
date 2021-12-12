@@ -27,14 +27,15 @@ app.get('/client.js',sendClient);
 app.get('/style.css',sendCSS);
 app.get('/currentCart',serveCurrentCartPage);
 app.get('/reports',serveReportsPage);
+//gets for reports
 app.get('/reports/genre', serveGenreReport)
+app.get('/reports/author', serveAuthorReport)
+app.get('/reports/dateRange', serveDateRangeReport)
+app.get('/reports/dateRangeWithBook', serveDateRangeReportWithBook)
 //posts
 app.post('/insertBook', addBookToDB)
 app.post('/orderBook',addBookToCart)
-//app.post('/reports/genre', serveGenreReport)
-app.post('/reports/author', serveAuthorReport)
-app.post('/reports/dateRange', serveDateRangeReport)
-app.post('/reports/dateRangeWithBook', serveDateRangeReportWithBook)
+
 
 currentCart=[];
 
@@ -51,26 +52,31 @@ const client = new Client({
 openServer();
 //function to serve genre report
 function serveGenreReport(req,res,next){
-    //access the view
+    //define reportName
     reportName="Sales by Genre";
-    console.log("I am about to query")
+    //access the view
     client.query(`select * from genre_sales;`, (err, queryResult) => {
         if (err) throw err;
-        console.log("I have queried and found data");
-        for (let row of queryResult.rows) {
-            console.log(JSON.stringify(row));
-        }
         let toSend = {
             rows: queryResult.rows,
             reportName: reportName
         }
         res.render('specificReport',toSend);
-        //res.render('specificReport',queryResult,reportName);
-        console.log("this should be rendered");
     });
 }
 //function to serve author report
 function serveAuthorReport(req,res,next){
+      //define reportName
+      reportName="Sales by Author";
+      //access the view
+      client.query(`select * from author_sales;`, (err, queryResult) => {
+          if (err) throw err;
+          let toSend = {
+              rows: queryResult.rows,
+              reportName: reportName
+          }
+          res.render('specificReport',toSend);
+      });
     
 }
 //function to serve date range report
@@ -313,25 +319,3 @@ function sendCSS(req,res,next){
     } while (currentDate - date < milliseconds);
   }*/
 
-  /*
-  form(action='/reports/genre' method="get")
-        button(type="submit") View Sales by Genre
-
-    form(action='/reports/authorID' method="post")
-        button(type="submit") View Sales by Author
-
-    form(action='/reports/dateRange' method="post")
-        p Start Date (enter as YYYY-MM-DD): 
-            input(type="text" name= "startDate" required)
-        p End Date (enter as YYYY-MM-DD): 
-            input(type="text" name= "endDate" required)
-        button(type="submit") View All Sales by Date
-
-    form(action='/reports/dateRangeWithBook' method="post")
-        p Start Date (enter as YYYY-MM-DD): 
-            input(type="text" name= "startDate" required)
-        p End Date (enter as YYYY-MM-DD): 
-            input(type="text" name= "endDate" required)
-        p ISBN to search: 
-            input(type="text" name= "isbn" required)
-        button(type="submit") View Sales by Date for Specific Book*/

@@ -54,8 +54,9 @@ function serveGenreReport(req,res,next){
     console.log("I am about to query")
     client.query(`select * from genre_sales;`, (err, queryResult) => {
         if (err) throw err;
-        console.log("I have queried and found data")
+        console.log("I have queried and found data");
         res.render('specificReport',queryResult,reportName);
+        console.log("this should be rendered");
     });
 }
 //function to serve author report

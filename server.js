@@ -116,7 +116,19 @@ function serveDateRangeReport(req,res,next){
 
 //function to serve date range report on a specific book
 function serveDateRangeReportWithBook(req,res,next){
-    
+    startDate = req.body.startDate;
+    endDate= req.body.endDate;
+    isbn = req.body.isbn;
+    client.query(`select * from book_sales_between_dates('${startDate}','${endDate}','${isbn}');`, (err, queryResult) => {
+        if (err) throw err;
+        let toSend = {
+            result: queryResult.rows[0],
+            startDate: startDate,
+            endDate: endDate,
+            isbn: isbn
+        }
+        res.render("dateRangeReportBook",toSend)
+    });
 }
 
 

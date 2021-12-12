@@ -68,7 +68,7 @@ function register(req,res,next){
     newUserID = specifierChar.concat(newUserID)
     console.log(newUserID);
     //get the values from the form
-    userName = req.body.userName;
+    userName = req.body.username;
 
     shn=req.body.shn;
     ssn=req.body.ssn;

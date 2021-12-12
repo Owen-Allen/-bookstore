@@ -27,10 +27,11 @@ app.get('/client.js',sendClient);
 app.get('/style.css',sendCSS);
 app.get('/currentCart',serveCurrentCartPage);
 app.get('/reports',serveReportsPage);
+app.get('/reports/genre', serveGenreReport)
 //posts
 app.post('/insertBook', addBookToDB)
 app.post('/orderBook',addBookToCart)
-app.get('/reports/genre', serveGenreReport)
+//app.post('/reports/genre', serveGenreReport)
 app.post('/reports/author', serveAuthorReport)
 app.post('/reports/dateRange', serveDateRangeReport)
 app.post('/reports/dateRangeWithBook', serveDateRangeReportWithBook)
@@ -58,7 +59,8 @@ function serveGenreReport(req,res,next){
         for (let row of queryResult.rows) {
             console.log(JSON.stringify(row));
         }
-        res.render('specificReport',queryResult,reportName);
+        res.render('home');
+        //res.render('specificReport',queryResult,reportName);
         console.log("this should be rendered");
     });
 }
@@ -305,3 +307,26 @@ function sendCSS(req,res,next){
       currentDate = Date.now();
     } while (currentDate - date < milliseconds);
   }*/
+
+  /*
+  form(action='/reports/genre' method="get")
+        button(type="submit") View Sales by Genre
+
+    form(action='/reports/authorID' method="post")
+        button(type="submit") View Sales by Author
+
+    form(action='/reports/dateRange' method="post")
+        p Start Date (enter as YYYY-MM-DD): 
+            input(type="text" name= "startDate" required)
+        p End Date (enter as YYYY-MM-DD): 
+            input(type="text" name= "endDate" required)
+        button(type="submit") View All Sales by Date
+
+    form(action='/reports/dateRangeWithBook' method="post")
+        p Start Date (enter as YYYY-MM-DD): 
+            input(type="text" name= "startDate" required)
+        p End Date (enter as YYYY-MM-DD): 
+            input(type="text" name= "endDate" required)
+        p ISBN to search: 
+            input(type="text" name= "isbn" required)
+        button(type="submit") View Sales by Date for Specific Book*/

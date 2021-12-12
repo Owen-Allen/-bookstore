@@ -361,7 +361,7 @@ function serveCurrentCartPage(req,res,next){
 //function to serve the reports page
 function serveReportsPage(req,res,next){
     //change to render reports
-    res.render('reports');
+    res.render('reports',{session: req.session});
 }
 
 //function to process adding a book to cart

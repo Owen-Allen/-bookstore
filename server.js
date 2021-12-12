@@ -43,6 +43,7 @@ app.post('/orderBook',addBookToCart)
 app.post('/deleteBook',deleteBookFromDB)
 app.post('/login',login);
 app.post('/register',register);
+app.post('/placeOrder',placeOrder)
 
 
 currentCart=[];
@@ -59,6 +60,49 @@ const client = new Client({
 //open the server
 openServer();
 
+function placeOrder(req,res,next){
+    //generate the orderID
+    newOrderID = Math.floor(Math.random() * 100000000);
+    newOrderID = newOrderID.toString()
+    console.log(newOrderID)
+    //generate the Date
+    let theDate = new Date()
+    theDate = theDate.toISOString().split('T')[0]
+    console.log(theDate);
+
+    shn=req.body.shn;
+    ssn=req.body.ssn;
+    scn=req.body.scn;
+    spn=req.body.spn;
+    spc=req.body.spc;
+
+    bhn=req.body.bhn;
+    bsn=req.body.bsn;
+    bcn=req.body.bcn;
+    bpn=req.body.bpn;
+    bpc=req.body.bpc;
+
+    //insert into user account
+    client.query(`insert into user_order values('${req.session.userID}','${newOrderID}','${theDate}','124','Shipping Avenue','Bracebridge','QC','W3R3T3','${bhn}','${bsn}','${bcn}','${bpn}','${bpc}','${shn}','${ssn}','${scn}','${spn}','${spc}');`)
+    .then(queryResult => {
+        //loop over every item in cart
+        currentCart.forEach(bookOrder =>{
+            //insert the item in cart
+            client.query(`insert into user_order values('${newOrderID}','${bookOrder.isbn}','${bookOrder.quantity}');`)
+            .then(()=>{
+                console.log(`Added book ${bookOrder.isbn}.`)
+            })
+            //query insert into order object
+            //query call function orderBooks
+        })
+    //once code has fully run
+    })
+    .then(()=>{
+        //clear current cart
+        currentCart = [];
+        res.render("home")
+    })
+}
 
 function register(req,res,next){
     //generate the random user ID

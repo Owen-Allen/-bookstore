@@ -50,8 +50,11 @@ openServer();
 //function to serve genre report
 function serveGenreReport(req,res,next){
     //access the view
-    reportName="Sales by Genre"
-    client.query(`SELECT * FROM author_sales';`, (err, queryResult) => {
+    reportName="Sales by Genre";
+    console.log("I am about to query")
+    client.query(`SELECT * FROM genre_sales';`, (err, queryResult) => {
+        if (err) throw err;
+        console.log("I have queried and found data")
         res.render('specificReport',queryResult,reportName);
     });
 }

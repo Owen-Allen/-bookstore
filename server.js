@@ -30,6 +30,7 @@ app.get('/reports',serveReportsPage);
 //gets for reports
 app.get('/reports/genre', serveGenreReport)
 app.get('/reports/author', serveAuthorReport)
+app.get('/reports/saleDates',serveSaleDateReport)
 app.get('/reports/dateRange', serveDateRangeReport)
 app.get('/reports/dateRangeWithBook', serveDateRangeReportWithBook)
 //posts
@@ -79,6 +80,23 @@ function serveAuthorReport(req,res,next){
       });
     
 }
+
+//function to serve sale date report
+function serveSaleDateReport(req,res,next){
+    //define reportName
+    reportName="Sales by Date";
+    //access the view
+    client.query(`select * from sales_by_date_book;`, (err, queryResult) => {
+        if (err) throw err;
+        let toSend = {
+            rows: queryResult.rows,
+            reportName: reportName
+        }
+        res.render('specificReport',toSend);
+    });
+  
+}
+
 //function to serve date range report
 function serveDateRangeReport(req,res,next){
     

@@ -82,7 +82,7 @@ function register(req,res,next){
     bpn=req.body.bpn;
     bpc=req.body.bpc;
     //insert the user
-    client.query(`insert into user_account values('${newUserID}','${userName}','${shn}','${ssn}','${scn}','${spn}','${spc}','${bhn}','${bsn}','${bcn}','${bpn}','${bpc}');`, (err, queryResult) => {
+    client.query(`insert into user_account values('${newUserID}','${userName}',false,'${shn}','${ssn}','${scn}','${spn}','${spc}','${bhn}','${bsn}','${bcn}','${bpn}','${bpc}');`, (err, queryResult) => {
         if (err) throw err;
         //log the user in
         req.session.loggedin = true;

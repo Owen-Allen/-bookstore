@@ -490,7 +490,7 @@ function addBookToDB(req,res,next){
 }
 //serve the book insert page
 function serveBookInsert(req,res,next){
-    res.render("insertBook");
+    res.render("insertBook",{session: req.session});
 }
 
 

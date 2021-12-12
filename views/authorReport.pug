@@ -1,0 +1,18 @@
+script(src="client.js")
+link(rel='stylesheet', href='style.css') 
+
+header
+    a(href="/")= "Home Page"
+    br
+    a(href="/insertBook")= `Book Insert Page`
+    br
+    a(href=`/bookSearch`)= `Book Search Page`
+    br
+    a(href=`/currentCart`)= `View Cart`
+    br
+    a(href=`/reports`)= `Reports`
+body
+    h1= `This is the report for ${reportName}`
+    ul
+        for row in rows
+            li= `Author: ${row.author}, Total Sales: ${row.total_book_sales}`

@@ -62,7 +62,7 @@ function serveGenreReport(req,res,next){
             rows: queryResult.rows,
             reportName: reportName
         }
-        res.render('specificReport',toSend);
+        res.render('genreReport',toSend);
     });
 }
 //function to serve author report
@@ -76,7 +76,7 @@ function serveAuthorReport(req,res,next){
               rows: queryResult.rows,
               reportName: reportName
           }
-          res.render('specificReport',toSend);
+          res.render('authorReport',toSend);
       });
     
 }
@@ -92,7 +92,7 @@ function serveSaleDateReport(req,res,next){
             rows: queryResult.rows,
             reportName: reportName
         }
-        res.render('specificReport',toSend);
+        res.render('saleDateReport',toSend);
     });
   
 }

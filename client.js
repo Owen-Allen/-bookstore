@@ -107,7 +107,7 @@ function searchByAll(){
     }
     
 	//Send a get request for new data so we can access the db
-	req.open("POST", `/bookSearchPrice/all`);
+	req.open("POST", `/bookSearchAll`);
     req.setRequestHeader("Content-Type", "text/html")
 	req.send(JSON.stringify(searchCondition));
 }

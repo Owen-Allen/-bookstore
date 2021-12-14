@@ -46,6 +46,7 @@ app.post('/login',login);
 app.post('/register',register);
 app.post('/placeOrder',placeOrder)
 app.post('/placeOrderWithSaved',placeOrderWithSaved)
+app.post('/bookSearchAll',searchByAll);
 
 currentCart=[];
 

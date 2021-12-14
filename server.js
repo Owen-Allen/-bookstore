@@ -515,7 +515,7 @@ function sendToBookPage(req,res,next){
     //get the books
     .then(queryResult => {
         //get the authors
-        client.query(`SELECT * FROM from wrote natural join author where isbn = '${isbnToSearch}';`)
+        client.query(`SELECT * FROM wrote natural join author where isbn = '${isbnToSearch}';`)
         .then(authResult => {
             //get the publisher
             client.query(`SELECT * FROM published natural join publisher where isbn = '${isbnToSearch}';`, (err, pubResult) => {

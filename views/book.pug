@@ -28,7 +28,18 @@ else
 body
     ul
         for row in queryResult.rows
-            li= `Title: ${row.title}, Genre: ${row.genre}, ISBN: ${row.isbn}, Author:  ${row.author_id}, Publisher: ${row.publisher_id}, Pages: ${row.num_pages} Price:${row.price}, Stock:${row.stock},  `
+            li= `Title: ${row.title}, Genre: ${row.genre}, ISBN: ${row.isbn}, Pages: ${row.num_pages} Price:${row.price}, Stock:${row.stock}`
+            
+            if (hasAuthData)
+                ul
+                    for authRow in authorResult.rows
+                        li=`Author: ${authRow.name}, ${authRow.author_id}`
+
+            if (hasPubData)
+                ul
+                    for pubRow in publisherResult.rows
+                        li=`Author: ${pubRow.name}, ${pubRow.publisher_id}`
+
             form(action='/orderBook' method="post")
                 p How many of copies would you like to add to cart? 
                     input(type="text" name= "quantity" required)

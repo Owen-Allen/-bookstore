@@ -511,7 +511,7 @@ function serveBookInsert(req,res,next){
 //send to a book page based on the isbn received from link
 function sendToBookPage(req,res,next){
     let isbnToSearch = req.params.isbn;
-    client.query(`SELECT * FROM book where isbn = '${isbnToSearch}';`, (err, queryResult) => {
+    client.query(`SELECT * FROM book natural join wrote natural join published where isbn = '${isbnToSearch}';`, (err, queryResult) => {
         res.render('book',{queryResult: queryResult, session: req.session});
     });
 }

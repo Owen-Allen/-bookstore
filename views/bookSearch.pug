@@ -59,6 +59,7 @@ body
         button#searchButtonPrice(type="button" onclick="searchByPrice()") Search for Books by Price (Min,Max)
         br
         br
+        button#searchButtonAll(type="button" onclick="searchByAll()") Search for Books by All Conditions
     p Book List
     ul
         for row in queryResult.rows

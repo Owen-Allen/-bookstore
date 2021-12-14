@@ -511,14 +511,14 @@ function serveBookInsert(req,res,next){
 //send to a book page based on the isbn received from link
 function sendToBookPage(req,res,next){
     let isbnToSearch = req.params.isbn;
-    client.query(`SELECT * FROM book where isbn = '${isbn}';`)
+    client.query(`SELECT * FROM book where isbn = '${isbnToSearch}';`)
     //get the books
     .then(queryResult => {
         //get the authors
-        client.query(`SELECT * FROM from wrote natural join author where isbn = '${isbn}';`)
+        client.query(`SELECT * FROM from wrote natural join author where isbn = '${isbnToSearch}';`)
         .then(authResult => {
             //get the publisher
-            client.query(`SELECT * FROM published natural join publisher where isbn = '${isbn}';`, (err, pubResult) => {
+            client.query(`SELECT * FROM published natural join publisher where isbn = '${isbnToSearch}';`, (err, pubResult) => {
                 //if the book was written and published
                 if (authResult.rowCount > 0 && pubResult.rowCount >0){
                     res.render('book',{queryResult: queryResult, authorResult: authResult, publisherResult: pubResult, hasPubData: true, hasAuthData: true, session: req.session});

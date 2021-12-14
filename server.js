@@ -578,14 +578,15 @@ function searchByPriceServe(req,res,next){
 
 //rerender the home page based on all search query received from client
 function searchByAll(req,res,next){
-    let minToSearch = parseFloat(req.body.min);
+    console.log("Yeah I fucking got it")
+    /*let minToSearch = parseFloat(req.body.min);
     let maxToSearch = parseFloat(req.body.max);
     let titleToSearch = req.body.title;
     let genreToSearch = req.body.genre;
     let authorToSearch = req.body.author;
     client.query(`SELECT * FROM book natural join wrote natural join author where name = '${authorToSearch}' and title = '${titleToSearch}' and genre = '${genreToSearch}' and price >= ${minToSearch} and price <= ${maxToSearch};`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/bookSearch.pug",{queryResult:queryResult, session: req.session}));
-    });
+    });*/
 }
 
 

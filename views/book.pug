@@ -29,7 +29,7 @@ body
     ul
         for row in queryResult.rows
             li= `Title: ${row.title}, Genre: ${row.genre}, ISBN: ${row.isbn}, Pages: ${row.num_pages} Price:${row.price}, Stock:${row.stock}`
-            
+
             if (hasAuthData)
                 ul
                     for authRow in authorResult.rows
@@ -38,7 +38,7 @@ body
             if (hasPubData)
                 ul
                     for pubRow in publisherResult.rows
-                        li=`Author: ${pubRow.name}, ${pubRow.publisher_id}`
+                        li=`Publisher: ${pubRow.name}, ${pubRow.publisher_id}`
 
             form(action='/orderBook' method="post")
                 p How many of copies would you like to add to cart? 

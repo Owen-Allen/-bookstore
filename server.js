@@ -577,7 +577,7 @@ function searchByPriceServe(req,res,next){
 }
 
 //rerender the home page based on all search query received from client
-function searchByPriceServe(req,res,next){
+function searchByAll(req,res,next){
     let minToSearch = req.body.min;
     let maxToSearch = req.body.max;
     let titleToSearch = req.body.title;

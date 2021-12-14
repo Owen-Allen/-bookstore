@@ -60,10 +60,12 @@ CREATE OR REPLACE FUNCTION pay_publisher()
 	LANGUAGE plpgsql
 	AS $$
 	BEGIN
-		UPDATE publisher
-		SET bank_account = bank_account + (OLD.stock - NEW.stock) * NEW.pub_cut * NEW.price
-		WHERE publisher.publisher_id IN (SELECT publisher_id FROM book NATURAL JOIN published
-										WHERE ISBN = NEW.ISBN);
+		IF ((OLD.stock - NEW.stock) > 0) THEN
+			UPDATE publisher
+				SET bank_account = bank_account + (OLD.stock - NEW.stock) * NEW.pub_cut * NEW.price
+				WHERE publisher.publisher_id IN (SELECT publisher_id FROM book NATURAL JOIN published
+												WHERE ISBN = NEW.ISBN);
+		END IF;
 		RETURN NEW;
 	END;
 	$$;

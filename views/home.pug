@@ -16,9 +16,9 @@ if (session.loggedin)
             br
             a(href='/deleteBooks')= "Book Deletion"
             br
-            a(href='/logout')= "Logout"
-            br
             a(href='/viewOrders')= "View admin orders"
+            br
+            a(href='/logout')= "Logout"
             br
     else 
         header
@@ -26,11 +26,11 @@ if (session.loggedin)
             br
             a(href=`/bookSearch`)= `Book Search Page`
             br
-            a(href='/logout')= "Logout"
-            br
             a(href=`/currentCart`)= `View Cart`
             br
             a(href='/viewOrders')= "View your orders"
+            br
+            a(href='/logout')= "Logout"
             br
     head
         p This is the home page

@@ -15,16 +15,21 @@ if (session.isAdmin)
         br
         a(href='/deleteBooks')= "Book Deletion"
         br
+        a(href='/viewOrders')= "View your orders"
+        br
         a(href='/logout')= "Logout"
+        br
 else 
     header
         a(href="/")= "Home Page"
         br
         a(href=`/bookSearch`)= `Book Search Page`
         br
-        a(href='/logout')= "Logout"
-        br
         a(href=`/currentCart`)= `View Cart`
+        br
+        a(href='/viewOrders')= "View your orders"
+        br
+        a(href='/logout')= "Logout"
         br
 head
     p= `This is the order view page for ${session.username}`

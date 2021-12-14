@@ -50,3 +50,10 @@ How we deployed our app
                 console.log(JSON.stringify(row));
             }
         });
+
+MAKING THE DB
+RUN THE SQL FILES IN THE FOLLOWING ORDER
+1. Make_Table.sql
+2. Insert_Views.sql
+3. CREATE_FUNCTIONS.sql
+4. Insert_Values.sql

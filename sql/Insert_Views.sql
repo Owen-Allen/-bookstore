@@ -25,4 +25,3 @@ create view sales_by_date_book(order_date,total_book_sales,isbn) as(
     group by order_date, isbn
 );
 
-

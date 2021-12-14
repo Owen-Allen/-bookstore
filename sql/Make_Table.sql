@@ -1,15 +1,19 @@
-drop view author_sales;
-drop view sales_by_date;
-drop view genre_sales;
+drop view if exists author_sales;
+drop view if exists sales_by_date;
+drop view if exists sales_by_date_book;
+drop view if exists genre_sales;
 
-drop table published;
-drop table wrote;
-drop table order_object;
-drop table user_order;
-drop table author;
-drop table publisher;
-drop table book;
-drop table user_account;
+drop function if exists book_sales_between_dates;
+drop function if exists sales_between_dates;
+
+drop table if exists published;
+drop table if exists wrote;
+drop table if exists order_object;
+drop table if exists user_order;
+drop table if exists author;
+drop table if exists publisher;
+drop table if exists book;
+drop table if exists user_account;
 
 create table book
 	(isbn		varchar(17) UNIQUE NOT NULL, 
@@ -25,6 +29,7 @@ create table book
 create table user_account
 	(user_id varchar(10) UNIQUE NOT NULL,
 	name varchar(100),
+	isAdmin boolean DEFAULT FALSE,
 	shipping_house_number varchar(8),
 	shipping_street	varchar(50),
 	shipping_city varchar(50),
@@ -47,6 +52,7 @@ create table author
 create table publisher
 	(publisher_id 	varchar(10) UNIQUE NOT NULL,
 	name 			varchar(100),
+	bank_account numeric(15,2) DEFAULT 0,
 	primary key(publisher_id)
 );
 
@@ -65,13 +71,13 @@ create table user_order
 	billing_city varchar(50),
 	billing_province varchar(50),
 	billing_postal_code varchar(6),	
-	destination_house_number varchar(8),
-	destination_street	varchar(50),
-	destination_city varchar(50),
-	destination_province varchar(50),
-	destination_postal_code varchar(6),
+	shipping_house_number varchar(8),
+	shipping_street	varchar(50),
+	shipping_city varchar(50),
+	shipping_province varchar(50),
+	shipping_postal_code varchar(6),
 	primary key(order_id),
-	foreign key (user_id) references user_account	
+	foreign key (user_id) references user_account on delete cascade
 );
 
 create table order_object
@@ -79,22 +85,28 @@ create table order_object
 	isbn			varchar(17),
 	quantity		int DEFAULT 0,
 	primary key(order_id, isbn),
-	foreign key (order_id) references user_order(order_id),
-	foreign key (isbn) references book(isbn)
+	foreign key (order_id) references user_order(order_id)
+	ON DELETE CASCADE,
+	foreign key (isbn) references book(isbn) 
+	ON DELETE CASCADE
 );
 
 create table wrote
 	(isbn		varchar(17),
 	author_id   varchar(10),
 	primary key (isbn, author_id),
-	foreign key (author_id) references author,
+	foreign key (author_id) references author
+	ON DELETE CASCADE,
 	foreign key (isbn) references book
+	ON DELETE CASCADE
 );
 
 create table published
 	(isbn		   varchar(17),
 	publisher_id   varchar(10),
 	primary key (isbn, 	publisher_id),
-	foreign key (publisher_id) references publisher,
+	foreign key (publisher_id) references publisher
+	ON DELETE CASCADE,
 	foreign key (isbn) references book
+	ON DELETE CASCADE
 );

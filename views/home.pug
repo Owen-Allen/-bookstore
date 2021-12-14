@@ -17,6 +17,9 @@ if (session.loggedin)
             a(href='/deleteBooks')= "Book Deletion"
             br
             a(href='/logout')= "Logout"
+            br
+            a(href='/viewOrders')= "View admin orders"
+            br
     else 
         header
             a(href="/")= "Home Page"
@@ -26,6 +29,8 @@ if (session.loggedin)
             a(href='/logout')= "Logout"
             br
             a(href=`/currentCart`)= `View Cart`
+            br
+            a(href='/viewOrders')= "View your orders"
             br
     head
         p This is the home page

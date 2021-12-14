@@ -31,6 +31,7 @@ app.get('/reports',serveReportsPage);
 app.get('/login',serveLoginPage)
 app.get('/logout',logout)
 app.get('/register',serveRegisterPage)
+app.get('/viewOrders',serveOrdersPage);
 //gets and posts for reports
 app.get('/reports/genre', serveGenreReport)
 app.get('/reports/author', serveAuthorReport)
@@ -59,6 +60,19 @@ const client = new Client({
 });
 //open the server
 openServer();
+
+//function to let user view their own orders
+function serveOrdersPage(req,res,next){
+    //get orders where user is about
+    client.query(`SELECT * FROM user_order where user_id = '${req.session.userID}';`)
+    .then(queryResult => {
+        toSend={
+            result: queryResult,
+            session: req.session
+        }
+        res.render('userOrders',toSend);
+    });
+}
 
 
 function placeOrderWithSaved(req,res,next){

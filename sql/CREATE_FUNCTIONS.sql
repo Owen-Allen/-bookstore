@@ -1,23 +1,9 @@
 -- FUNCTIONS
 
--- CREATE OR REPLACE FUNCTION orderBooks(bookISBN varchar(17), numToOrder integer)
---  	RETURNS book
---  	language plpgsql
---  	AS $$ 
---  	declare
--- 		result book;	
--- 		BEGIN
--- 		UPDATE book		
--- 		SET stock = stock + numToOrder
--- 		WHERE book.ISBN = bookISBN;
--- 		SELECT * FROM book INTO result
--- 		WHERE book.ISBN = bookISBN;
--- 		RETURN result;
--- 	END;
---  	$$;
-
 -- get all books from a specific order, and give us the book's information, while also having quantity ordered.
 
+
+--  This function returns the number of sales between 2 dates
 CREATE OR REPLACE FUNCTION sales_between_dates(date_start date, date_end date)
 	RETURNS integer
 	language plpgsql
@@ -32,7 +18,8 @@ CREATE OR REPLACE FUNCTION sales_between_dates(date_start date, date_end date)
 	END;
 	$$;
 
-
+--  This function returns the number of sales for a book (specified by isbn)
+--  between a given date range
 CREATE OR REPLACE FUNCTION book_sales_between_dates(date_start date, date_end date, isbn_to_check varchar(10))
 	RETURNS integer
 	language plpgsql
@@ -52,9 +39,10 @@ CREATE OR REPLACE FUNCTION book_sales_between_dates(date_start date, date_end da
 DROP TRIGGER IF EXISTS calculate_publisher_cut ON order_object;
 DROP TRIGGER IF EXISTS place_order ON order_object;
 
-DROP TRIGGER IF EXISTS calculate_publisher_cut ON order_object;
 
-
+-- This function adds to the publisher.bank_account attribute
+-- the amount added is the change in stock amount, multiplied by the price and pub_cut
+-- for the affected book
 CREATE OR REPLACE FUNCTION pay_publisher()
 	RETURNS TRIGGER
 	LANGUAGE plpgsql
@@ -70,15 +58,17 @@ CREATE OR REPLACE FUNCTION pay_publisher()
 	END;
 	$$;
 
-
+-- This trigger activates everytime book is updated
+-- Call pay_publisher for each updated row
 CREATE TRIGGER calculate_publisher_cut
 	AFTER UPDATE
 	ON book
 	FOR EACH ROW
 		EXECUTE PROCEDURE pay_publisher();
-	
 
-
+-- Decreases the stock of a specific book
+-- by the quantity of books in the order (NEW)
+-- IF stock dips below 10, order more books
 CREATE OR REPLACE FUNCTION order_books()
 	RETURNS TRIGGER
 	LANGUAGE plpgsql
@@ -96,8 +86,11 @@ CREATE OR REPLACE FUNCTION order_books()
 	END;
 	$$;
 
+-- This trigger is called everytime an insert is made
+-- on order_object (The contents of a user's order)
+-- call order_books for the affected row
 CREATE TRIGGER place_order
 	AFTER INSERT
 	ON order_object
 	FOR EACH ROW
-		EXECUTE PROCEDURE subtract_stock();
+		EXECUTE PROCEDURE order_books();

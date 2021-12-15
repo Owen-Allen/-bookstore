@@ -10,6 +10,9 @@ function searchByTitle(){
         }
 	}
     searchCondition = document.getElementById("searchConditionTitle").value
+    if (searchCondition == undefined||searchCondition == null|| searchCondition ==  ""){
+        searchCondition = "EMPTY"
+    }
     
 	//Send a get request for new data so we can access the db
 	req.open("GET", `/bookSearchTitle/${searchCondition}`);
@@ -27,7 +30,9 @@ function searchByGenre(){
         }
 	}
     searchCondition = document.getElementById("searchConditionGenre").value
-    
+    if (searchCondition == undefined||searchCondition == null|| searchCondition ==  ""){
+        searchCondition = "EMPTY"
+    }
 	//Send a get request for new data so we can access the db
 	req.open("GET", `/bookSearchGenre/${searchCondition}`);
     req.setRequestHeader("Content-Type", "text/html")
@@ -44,7 +49,10 @@ function searchByAuthor(){
         }
 	}
     searchCondition = document.getElementById("searchConditionAuthor").value
-    
+    if (searchCondition == undefined||searchCondition == null|| searchCondition ==  ""){
+        searchCondition = "EMPTY"
+    }
+
 	//Send a get request for new data so we can access the db
 	req.open("GET", `/bookSearchAuthor/${searchCondition}`);
     req.setRequestHeader("Content-Type", "text/html")
@@ -62,6 +70,12 @@ function searchByPrice(){
 	}
     searchConditionMin = document.getElementById("searchConditionMinPrice").value
     searchConditionMax = document.getElementById("searchConditionMaxPrice").value
+    if (searchConditionMin == undefined||searchConditionMin == null|| searchConditionMin ==  ""){
+        searchConditionMin = "EMPTY"
+    }
+    if (searchConditionMax == undefined||searchConditionMax == null|| searchConditionMax ==  ""){
+        searchConditionMax = "EMPTY"
+    }
 	//Send a get request for new data so we can access the db
 	req.open("GET", `/bookSearchPrice/${searchConditionMin}/max/${searchConditionMax}`);
     req.setRequestHeader("Content-Type", "text/html")

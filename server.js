@@ -545,32 +545,52 @@ function sendToBookPage(req,res,next){
 
 //rerender the bookSearch page based on a title search query received from client
 function searchByTitleServe(req,res,next){
-    let titleToSearch = req.params.search;
-    client.query(`SELECT * FROM book where title = '${titleToSearch}';`, (err, queryResult) => {
+    if (req.params.search == "EMPTY"){
+        titleToSearch = ""
+    }else{
+        titleToSearch = req.params.search;
+    }
+    client.query(`SELECT * FROM book where title like '%${titleToSearch}%';`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/bookSearch.pug",{queryResult:queryResult, session: req.session}));
     });
 }
 
 //rerender the home page based on a genre search query received from client
 function searchByGenreServe(req,res,next){
-    let genreToSearch = req.params.search;
-    client.query(`SELECT * FROM book where genre = '${genreToSearch}';`, (err, queryResult) => {
+    if (req.params.search == "EMPTY"){
+        genreToSearch = ""
+    }else{
+        genreToSearch = req.params.search;
+    }
+    client.query(`SELECT * FROM book where genre like '%${genreToSearch}%';`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/bookSearch.pug",{queryResult:queryResult, session: req.session}));
     });
 }
 
 //rerender the home page based on a author search query received from client
 function searchByAuthorServe(req,res,next){
-    let authorToSearch = req.params.search;
-    client.query(`SELECT * FROM book natural join wrote natural join author where name = '${authorToSearch}';`, (err, queryResult) => {
+    if (req.params.search == "EMPTY"){
+        authorToSearch = ""
+    }else{
+        authorToSearch = req.params.search;
+    }
+    client.query(`SELECT * FROM book natural join wrote natural join author where name like '%${authorToSearch}%';`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/bookSearch.pug",{queryResult:queryResult, session: req.session}));
     });
 }
 
-//rerender the home page based on a price search query received from client
+//rerender the home page based on a price search query received from client 
 function searchByPriceServe(req,res,next){
-    let minToSearch = req.params.min;
-    let maxToSearch = req.params.max;
+    if (req.params.min == "EMPTY"){
+        minToSearch = 0;
+    }else{
+        minToSearch = parseFloat(req.params.min);
+    }
+    if (req.params.min == "EMPTY"){
+        maxToSearch = 10000;
+    }else{
+        maxToSearch = parseFloat(req.params.max);
+    }
     client.query(`SELECT * FROM book where price >= ${minToSearch} and price <= ${maxToSearch};`, (err, queryResult) => {
         res.status(200).send(pug.renderFile("./views/bookSearch.pug",{queryResult:queryResult, session: req.session}));
     });

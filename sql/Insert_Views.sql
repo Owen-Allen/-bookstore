@@ -1,5 +1,5 @@
 
--- This book contains the number of books sold by author
+-- This view contains the number of books sold by author
 -- If two authors wrote 1 book, each of those others
 -- get a sale for that book
 create view author_sales(author_id, total_book_sales) as(

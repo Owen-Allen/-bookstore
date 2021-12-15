@@ -26,6 +26,7 @@ app.get('/bookSearchPrice/:min/max/:max',searchByPriceServe)
 app.get('/bookRedirect/:isbn',sendToBookPage)
 app.get('/client.js',sendClient);
 app.get('/style.css',sendCSS);
+app.get('/book-16.ico',sendICO)
 app.get('/currentCart',serveCurrentCartPage);
 app.get('/reports',serveReportsPage);
 app.get('/login',serveLoginPage)
@@ -659,6 +660,16 @@ function sendClient(req,res,next){
 //read and send the js file for use
 function sendCSS(req,res,next){
 	fs.readFile("style.css", function(err, data){
+		if(err){
+			res.status(500).send("Error.");
+			return;
+		}
+		res.status(200).send(data)
+	});
+}
+
+function sendICO(req,res,next){
+	fs.readFile("book-16.ico", function(err, data){
 		if(err){
 			res.status(500).send("Error.");
 			return;

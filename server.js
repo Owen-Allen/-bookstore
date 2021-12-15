@@ -578,14 +578,36 @@ function searchByPriceServe(req,res,next){
 
 //rerender the home page based on all search query received from client
 function searchByAll(req,res,next){
-    console.log("Yeah I fucking got it")
-    let minToSearch = parseFloat(req.body.min);
-    let maxToSearch = parseFloat(req.body.max);
-    let titleToSearch = req.body.title;
-    let genreToSearch = req.body.genre;
-    let authorToSearch = req.body.author;
+    console.log(req.body.min, req.body.max, req.body.title, req.body.genre, req.body.author)
+    if (req.body.min == -1){
+        minToSearch = 0;
+    }else{
+        minToSearch = parseFloat(req.body.min);
+    }
+    if (req.body.max == -1){
+        maxToSearch = 100000;
+    }else{
+        maxToSearch = parseFloat(req.body.max);
+    }
+    if (req.body.title == "WRONG"){
+        titleToSearch = "";
+    }else{
+        titleToSearch = req.body.title;
+    }
+    if (req.body.genre == "WRONG"){
+        genreToSearch = ""
+    }else{
+        genreToSearch = req.body.genre;
+    }
+    if (req.body.author == "WRONG"){
+        authorToSearch = ""
+    }
+    else{
+        authorToSearch = req.body.author;
+    }
     console.log(minToSearch, maxToSearch,titleToSearch,genreToSearch,authorToSearch)
-    client.query(`SELECT * FROM book natural join wrote natural join author where name like '%${authorToSearch}%' and title like '%${titleToSearch}%' and genre = '%${genreToSearch}%' and price >= ${minToSearch} and price <= ${maxToSearch};`, (err, queryResult) => {
+    console.log(`SELECT * FROM book natural join wrote natural join author where name like '%${authorToSearch}%' and title like '%${titleToSearch}%' and genre like '%${genreToSearch}%' and price >= ${minToSearch} and price <= ${maxToSearch};`)
+    client.query(`SELECT * FROM book natural join wrote natural join author where name like '%${authorToSearch}%' and title like '%${titleToSearch}%' and genre like '%${genreToSearch}%' and price >= ${minToSearch} and price <= ${maxToSearch};`, (err, queryResult) => {
         res.render('bookSearch',{queryResult:queryResult, session: req.session})
     });
 }

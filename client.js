@@ -78,26 +78,28 @@ function searchByAll(){
 	}
     //get all data
     searchConditionTitle = document.getElementById("searchConditionTitle").value
-    if (searchConditionTitle == undefined||searchConditionTitle == null){
-        searchConditionTitle = ""
+    if (searchConditionTitle == undefined||searchConditionTitle == null|| searchConditionTitle ==  ""){
+        searchConditionTitle = "WRONG"
     }
     searchConditionAuthor = document.getElementById("searchConditionAuthor").value
-    if (searchConditionAuthor == undefined||searchConditionAuthor == null){
-        searchConditionAuthor = ""
+    if (searchConditionAuthor == undefined||searchConditionAuthor == null|| searchConditionAuthor == ""){
+        searchConditionAuthor = "WRONG"
     }
     searchConditionGenre = document.getElementById("searchConditionGenre").value
-    if (searchConditionGenre == undefined||searchConditionGenre == null){
-        searchConditionGenre = ""
+    if (searchConditionGenre == undefined||searchConditionGenre == null|| searchConditionGenre == ""){
+        searchConditionGenre = "WRONG"
     }
     searchConditionMin = document.getElementById("searchConditionMinPrice").value
-    if (searchConditionMin == undefined|| searchConditionMin ==null){
-        searchConditionMin = 0
+    if (searchConditionMin == undefined|| searchConditionMin ==null||searchConditionMin == ""){
+        searchConditionMin = -1
     }
     searchConditionMax = document.getElementById("searchConditionMaxPrice").value
-    if (searchConditionMax == undefined || searchConditionMax == null){
-        searchConditionMax = 9999999
+    if (searchConditionMax == undefined || searchConditionMax == null|| searchConditionMax == "" ){
+        searchConditionMax = -1
     }
-    
+
+    console.log(searchConditionTitle,searchConditionAuthor,searchConditionGenre,searchConditionMin,searchConditionMax)
+
     let searchCondition={
         title: searchConditionTitle,
         author: searchConditionAuthor,
@@ -105,6 +107,7 @@ function searchByAll(){
         min: searchConditionMin,
         max: searchConditionMax
     }
+    console.log(searchCondition)
     
 	//Send a get request for new data so we can access the db
 	req.open("POST", `/bookSearchAll`);

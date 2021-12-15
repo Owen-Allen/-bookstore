@@ -584,7 +584,7 @@ function searchByAll(req,res,next){
     let titleToSearch = req.body.title;
     let genreToSearch = req.body.genre;
     let authorToSearch = req.body.author;
-    
+    console.log(minToSearch, maxToSearch,titleToSearch,genreToSearch,authorToSearch)
     client.query(`SELECT * FROM book natural join wrote natural join author where name like '%${authorToSearch}%' and title like '%${titleToSearch}%' and genre = '%${genreToSearch}%' and price >= ${minToSearch} and price <= ${maxToSearch};`, (err, queryResult) => {
         res.render('bookSearch',{queryResult:queryResult, session: req.session})
     });

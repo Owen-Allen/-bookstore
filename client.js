@@ -73,35 +73,35 @@ function searchByAll(){
 	req.onreadystatechange = function() {
 		if(this.readyState==4 && this.status==200){
             console.log(this.response)
-            //document.body.innerHTML=this.response;
+            document.body.innerHTML=this.response;
         }
 	}
     //get all data
     searchConditionTitle = document.getElementById("searchConditionTitle").value
-    if (searchConditionTitle == null){
+    if (searchConditionTitle == undefined||searchConditionTitle == null){
         searchConditionTitle = ""
     }
     searchConditionAuthor = document.getElementById("searchConditionAuthor").value
-    if (searchConditionAuthor == null){
+    if (searchConditionAuthor == undefined||searchConditionAuthor == null){
         searchConditionAuthor = ""
     }
     searchConditionGenre = document.getElementById("searchConditionGenre").value
-    if (searchConditionGenre == null){
+    if (searchConditionGenre == undefined||searchConditionGenre == null){
         searchConditionGenre = ""
     }
     searchConditionMin = document.getElementById("searchConditionMinPrice").value
-    if (searchConditionMin == null){
+    if (searchConditionMin == undefined|| searchConditionMin ==null){
         searchConditionMin = 0
     }
     searchConditionMax = document.getElementById("searchConditionMaxPrice").value
-    if (searchConditionMax == null){
+    if (searchConditionMax == undefined || searchConditionMax == null){
         searchConditionMax = 9999999
     }
     
     let searchCondition={
         title: searchConditionTitle,
         author: searchConditionAuthor,
-        genre: searchConditionTitle,
+        genre: searchConditionGenre,
         min: searchConditionMin,
         max: searchConditionMax
     }

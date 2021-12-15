@@ -78,36 +78,36 @@ function searchByAll(){
 	}
     //get all data
     searchConditionTitle = document.getElementById("searchConditionTitle").value
-    if (searchConditionTitle == null){
+    if (searchConditionTitle == undefined||searchConditionTitle == null){
         searchConditionTitle = ""
     }
     searchConditionAuthor = document.getElementById("searchConditionAuthor").value
-    if (searchConditionAuthor == null){
+    if (searchConditionAuthor == undefined||searchConditionAuthor == null){
         searchConditionAuthor = ""
     }
     searchConditionGenre = document.getElementById("searchConditionGenre").value
-    if (searchConditionGenre == null){
+    if (searchConditionGenre == undefined||searchConditionGenre == null){
         searchConditionGenre = ""
     }
     searchConditionMin = document.getElementById("searchConditionMinPrice").value
-    if (searchConditionMin == null){
+    if (searchConditionMin == undefined|| searchConditionMin ==null){
         searchConditionMin = 0
     }
     searchConditionMax = document.getElementById("searchConditionMaxPrice").value
-    if (searchConditionMax == null){
+    if (searchConditionMax == undefined || searchConditionMax == null){
         searchConditionMax = 9999999
     }
     
     let searchCondition={
         title: searchConditionTitle,
         author: searchConditionAuthor,
-        genre: searchConditionTitle,
+        genre: searchConditionGenre,
         min: searchConditionMin,
         max: searchConditionMax
     }
     
 	//Send a get request for new data so we can access the db
 	req.open("POST", `/bookSearchAll`);
-    req.setRequestHeader("Content-Type", "text/html")
+    req.setRequestHeader("Content-Type", "application/json")
 	req.send(JSON.stringify(searchCondition));
 }

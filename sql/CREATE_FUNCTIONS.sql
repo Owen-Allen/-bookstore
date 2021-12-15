@@ -1,8 +1,5 @@
 -- FUNCTIONS
 
--- get all books from a specific order, and give us the book's information, while also having quantity ordered.
-
-
 --  This function returns the number of sales between 2 dates
 CREATE OR REPLACE FUNCTION sales_between_dates(date_start date, date_end date)
 	RETURNS integer

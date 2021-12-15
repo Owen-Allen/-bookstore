@@ -15,6 +15,9 @@ drop table if exists publisher;
 drop table if exists book;
 drop table if exists user_account;
 
+-- create the book table
+-- isbn is the primary key
+-- ISBN cannot be null
 create table book
 	(isbn		varchar(17) UNIQUE NOT NULL, 
 	 title		varchar(100), 
@@ -26,6 +29,10 @@ create table book
 	 primary key (isbn)
 );
 
+-- create the user_account table
+-- user_id is the primary key
+-- user_id cannot be null
+-- New accounts default to not being an admin
 create table user_account
 	(user_id varchar(10) UNIQUE NOT NULL,
 	name varchar(100),
@@ -43,12 +50,19 @@ create table user_account
 	primary key (user_id)
 );
 
+-- create the author table
+-- author_id is the primary key
+-- author_id cannot be null
 create table author
 	(author_id 		varchar(10) UNIQUE NOT NULL,
 	name 			varchar(100),
 	primary key(author_id)
 );
 
+-- create the publisher table
+-- publisher_id is the primary key
+-- publisher_id cannot be null
+-- the bank account defaults to a bank account balance of 0 when a new publisher is inserted
 create table publisher
 	(publisher_id 	varchar(10) UNIQUE NOT NULL,
 	name 			varchar(100),
@@ -56,7 +70,9 @@ create table publisher
 	primary key(publisher_id)
 );
 
-
+-- create the user_order table
+-- order_id is the primary key
+-- foreign key user_id is from user_account, when the account is deleted so is the record of their order
 create table user_order
 	(user_id		varchar(10) NOT NULL,
 	order_id		varchar(10) UNIQUE NOT NULL,
@@ -80,6 +96,11 @@ create table user_order
 	foreign key (user_id) references user_account on delete cascade
 );
 
+-- create the order_object table
+-- order_id and isbn form the primary key
+-- the quantity of books defaults to 0
+-- order_id is a foreign key from the user_order
+-- isbn is a foreign key from book
 create table order_object
 	(order_id		varchar(10),
 	isbn			varchar(17),
@@ -91,6 +112,11 @@ create table order_object
 	ON DELETE CASCADE
 );
 
+
+-- create the wrote table
+-- author_id and isbn form the primary key
+-- author_id is a foreign key from author
+-- isbn is a foreign key from book
 create table wrote
 	(isbn		varchar(17),
 	author_id   varchar(10),
@@ -101,6 +127,10 @@ create table wrote
 	ON DELETE CASCADE
 );
 
+-- create the published table
+-- isbn and publisher_id form the primary key
+-- isbn is a foreign key from book
+-- publisher_id is a foreign key from publisher
 create table published
 	(isbn		   varchar(17),
 	publisher_id   varchar(10),

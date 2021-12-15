@@ -97,7 +97,9 @@ function searchByAll(){
     if (searchConditionMax == undefined || searchConditionMax == null){
         searchConditionMax = -1
     }
-    
+
+    console.log(searchConditionTitle,searchConditionAuthor,searchConditionGenre,searchConditionMin,searchConditionMax)
+
     let searchCondition={
         title: searchConditionTitle,
         author: searchConditionAuthor,
@@ -105,6 +107,7 @@ function searchByAll(){
         min: searchConditionMin,
         max: searchConditionMax
     }
+    console.log(searchCondition)
     
 	//Send a get request for new data so we can access the db
 	req.open("POST", `/bookSearchAll`);

@@ -579,7 +579,7 @@ function searchByAuthorServe(req,res,next){
     });
 }
 
-//rerender the home page based on a price search query received from client
+//rerender the home page based on a price search query received from client 
 function searchByPriceServe(req,res,next){
     if (req.params.min == "EMPTY"){
         minToSearch = 0;

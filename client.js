@@ -73,7 +73,7 @@ function searchByAll(){
 	req.onreadystatechange = function() {
 		if(this.readyState==4 && this.status==200){
             console.log(this.response)
-            document.body.innerHTML=this.response;
+            //document.body.innerHTML=this.response;
         }
 	}
     //get all data
@@ -108,6 +108,6 @@ function searchByAll(){
     
 	//Send a get request for new data so we can access the db
 	req.open("POST", `/bookSearchAll`);
-    req.setRequestHeader("Content-Type", "text/html")
+    req.setRequestHeader("Content-Type", "application/json")
 	req.send(JSON.stringify(searchCondition));
 }

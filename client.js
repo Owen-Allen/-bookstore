@@ -79,23 +79,23 @@ function searchByAll(){
     //get all data
     searchConditionTitle = document.getElementById("searchConditionTitle").value
     if (searchConditionTitle == undefined||searchConditionTitle == null){
-        searchConditionTitle = ""
+        searchConditionTitle = "WRONG"
     }
     searchConditionAuthor = document.getElementById("searchConditionAuthor").value
     if (searchConditionAuthor == undefined||searchConditionAuthor == null){
-        searchConditionAuthor = ""
+        searchConditionAuthor = "WRONG"
     }
     searchConditionGenre = document.getElementById("searchConditionGenre").value
     if (searchConditionGenre == undefined||searchConditionGenre == null){
-        searchConditionGenre = ""
+        searchConditionGenre = "WRONG"
     }
     searchConditionMin = document.getElementById("searchConditionMinPrice").value
     if (searchConditionMin == undefined|| searchConditionMin ==null){
-        searchConditionMin = 0
+        searchConditionMin = -1
     }
     searchConditionMax = document.getElementById("searchConditionMaxPrice").value
     if (searchConditionMax == undefined || searchConditionMax == null){
-        searchConditionMax = 9999999
+        searchConditionMax = -1
     }
     
     let searchCondition={

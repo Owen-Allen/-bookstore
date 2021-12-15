@@ -587,7 +587,7 @@ function searchByPriceServe(req,res,next){
         minToSearch = parseFloat(req.params.min);
     }
     if (req.params.min == "EMPTY"){
-        maxToSearch = 0;
+        maxToSearch = 10000;
     }else{
         maxToSearch = parseFloat(req.params.max);
     }

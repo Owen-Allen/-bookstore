@@ -78,23 +78,23 @@ function searchByAll(){
 	}
     //get all data
     searchConditionTitle = document.getElementById("searchConditionTitle").value
-    if (searchConditionTitle == undefined||searchConditionTitle == null){
+    if (searchConditionTitle == undefined||searchConditionTitle == null|| searchConditionTitle ==  ""){
         searchConditionTitle = "WRONG"
     }
     searchConditionAuthor = document.getElementById("searchConditionAuthor").value
-    if (searchConditionAuthor == undefined||searchConditionAuthor == null){
+    if (searchConditionAuthor == undefined||searchConditionAuthor == null|| searchConditionAuthor == ""){
         searchConditionAuthor = "WRONG"
     }
     searchConditionGenre = document.getElementById("searchConditionGenre").value
-    if (searchConditionGenre == undefined||searchConditionGenre == null){
+    if (searchConditionGenre == undefined||searchConditionGenre == null|| searchConditionGenre == ""){
         searchConditionGenre = "WRONG"
     }
     searchConditionMin = document.getElementById("searchConditionMinPrice").value
-    if (searchConditionMin == undefined|| searchConditionMin ==null){
+    if (searchConditionMin == undefined|| searchConditionMin ==null||searchConditionMin == ""){
         searchConditionMin = -1
     }
     searchConditionMax = document.getElementById("searchConditionMaxPrice").value
-    if (searchConditionMax == undefined || searchConditionMax == null){
+    if (searchConditionMax == undefined || searchConditionMax == null|| searchConditionMax == "" ){
         searchConditionMax = -1
     }
 

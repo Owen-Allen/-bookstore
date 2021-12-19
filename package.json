@@ -1,7 +1,7 @@
 {
   "name": "-bookstore",
   "version": "1.0.0",
-  "description": "Final Project for COMP3005\r AINT SHIT GETTING DONE IN THIS BITCH",
+  "description": "Final Project for COMP3005",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

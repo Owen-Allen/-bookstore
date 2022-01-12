@@ -57,6 +57,7 @@ CREATE OR REPLACE FUNCTION pay_publisher()
 
 -- This trigger activates everytime book is updated
 -- Call pay_publisher for each updated row
+-- This will be implicitely triggered by place_order / order_books()
 CREATE TRIGGER calculate_publisher_cut
 	AFTER UPDATE
 	ON book

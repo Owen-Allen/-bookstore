@@ -8,7 +8,7 @@ delete from book;
 delete from user_account;
 
 insert into book values('000000001','Isgramors Enchantments','Fiction',10.00, 100,259,0.5);
-insert into book values('000000002','Henry Ducklewit: A Life of Pain','Autobiography',1002.00, 1020,29,0.25);
+insert into book values('000000002','Henry Ducklewit: A Life of Pain','Autobiography',1002.00, 1030,29,0.25);
 insert into book values('000000003','The Absurdly Inane Adventures of the Wonder Crew','History',10.00, 100,219,0.33);
 insert into book values('000000004','Gonkies Guide to Getting Chonky','Self-Help',1.00, 610,132,0.57);
 insert into book values('000000005','Grinkies Guide to Getting Slinky','Self-Help',5.00, 23,22,0.59);
